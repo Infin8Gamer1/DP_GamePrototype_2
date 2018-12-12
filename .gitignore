@@ -18,10 +18,13 @@
 [Rr]elease/
 [Rr]eleases/
 x86/
+x64/
 bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+HighLevelAPI/lib/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
