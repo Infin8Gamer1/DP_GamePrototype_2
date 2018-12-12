@@ -28,10 +28,6 @@ Levels::Level1::Level1() : Level("Level1")
 	// Meshes
 	meshShip = nullptr;
 	meshBullet = nullptr;
-
-	// Sound manager
-	soundManager = nullptr;
-	musicChannel = nullptr;
 }
 
 void Levels::Level1::Load()
@@ -64,9 +60,6 @@ void Levels::Level1::Update(float dt)
 void Levels::Level1::Shutdown()
 {
 	std::cout << GetName() << "::Shutdown" << std::endl;
-
-	musicChannel->stop();
-	musicChannel = nullptr;
 }
 
 void Levels::Level1::Unload()
@@ -77,6 +70,4 @@ void Levels::Level1::Unload()
 	meshShip = nullptr;
 	delete meshBullet;
 	meshBullet = nullptr;
-
-	soundManager->Shutdown();
 }

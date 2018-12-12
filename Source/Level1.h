@@ -28,7 +28,6 @@
 
 class GameObject;
 class Mesh;
-class SoundManager;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -75,10 +74,6 @@ namespace Levels
 		// Title
 		static const unsigned titleStringLength = 20;
 		char windowTitle[titleStringLength];
-
-		// Sound manager
-		SoundManager* soundManager;
-		FMOD::Channel* musicChannel;
 	};
 }
 
