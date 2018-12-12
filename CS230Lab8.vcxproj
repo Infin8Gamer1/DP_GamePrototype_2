@@ -108,14 +108,8 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\BulletMovement.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
-    <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
-    <ClCompile Include="Source\Level3.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\MonkeyMovement.cpp" />
-    <ClCompile Include="Source\PatrolAI.cpp" />
-    <ClCompile Include="Source\Platformer.cpp" />
-    <ClCompile Include="Source\PlayerShip.cpp" />
     <ClCompile Include="Source\ScreenWrap.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -124,26 +118,19 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\TimedDeath.cpp" />
     <ClCompile Include="Source\Turet AI.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
-    <ClCompile Include="Source\WinLevel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Archetypes.h" />
     <ClInclude Include="Source\BulletMovement.h" />
     <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\Level2.h" />
     <ClInclude Include="Source\Level1.h" />
-    <ClInclude Include="Source\Level3.h" />
-    <ClInclude Include="Source\MonkeyMovement.h" />
     <ClInclude Include="Source\PatrolAI.h" />
-    <ClInclude Include="Source\Platformer.h" />
-    <ClInclude Include="Source\PlayerShip.h" />
     <ClInclude Include="Source\ScreenWrap.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\TimedDeath.h" />
     <ClInclude Include="Source\TurretAI.h" />
     <ClInclude Include="Source\Utils.h" />
-    <ClInclude Include="Source\WinLevel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
