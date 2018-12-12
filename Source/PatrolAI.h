@@ -105,7 +105,17 @@ namespace Behaviors
 		void ClearPath();
 
 		// Adds a point to the path.
+		// Params:
+		//   point = The point to add.
 		void AddPathPoint(Vector2D point);
+
+		// Sets whether the patrol AI is currently active.
+		// Params:
+		//   active = Whether the patrol Ai should be active.
+		void SetActive(bool active);
+
+		// Returns whether the patrol AI is currently active.
+		bool IsActive();
 
 	private:
 		//------------------------------------------------------------------------------
@@ -142,6 +152,7 @@ namespace Behaviors
 		Physics* physics;
 
 		// Other variables
+		bool active;
 		unsigned pathIndex;
 		unsigned nextPathIndex;
 		bool moving;

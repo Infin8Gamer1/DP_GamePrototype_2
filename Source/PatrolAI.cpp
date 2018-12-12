@@ -91,11 +91,15 @@ namespace Behaviors
 		if (path.size() <= 1)
 			return;
 
-		// Make sure the current path point is up to date.
-		UpdatePath();
+		// Only handle movement if the patrol AI is active.
+		if (active)
+		{
+			// Make sure the current path point is up to date.
+			UpdatePath();
 
-		// Handle movement.
-		Move();
+			// Handle movement.
+			Move();
+		}
 
 		// Draw the path for debugging purposes.
 		DebugDraw& debugDraw = DebugDraw::GetInstance();
@@ -158,6 +162,8 @@ namespace Behaviors
 	}
 
 	// Adds a point to the path.
+	// Params:
+	//   point = The point to add.
 	void PatrolAI::AddPathPoint(Vector2D point)
 	{
 		path.push_back(point);
@@ -173,6 +179,20 @@ namespace Behaviors
 				nextPathIndex = pathIndex + 1;
 			}
 		}
+	}
+
+	// Sets whether the patrol AI is currently active.
+	// Params:
+	//   active = Whether the patrol Ai should be active.
+	void PatrolAI::SetActive(bool active_)
+	{
+		active = active_;
+	}
+
+	// Returns whether the patrol AI is currently active.
+	bool PatrolAI::IsActive()
+	{
+		return active;
 	}
 
 	//------------------------------------------------------------------------------
