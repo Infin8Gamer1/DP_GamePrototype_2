@@ -46,6 +46,9 @@
     <ClCompile Include="Source\Utils.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Turet AI.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -78,6 +81,9 @@
     </ClInclude>
     <ClInclude Include="Source\Utils.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TurretAI.h">
+      <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
