@@ -19,25 +19,13 @@
     <ClCompile Include="Source\stdafx.cpp">
       <Filter>Precompiled</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MonkeyMovement.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\PlayerShip.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TimedDeath.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
     <ClCompile Include="Source\Archetypes.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Level2.cpp">
-      <Filter>Game\Levels</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Level1.cpp">
-      <Filter>Game\Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Level3.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
     <ClCompile Include="Source\ColorChange.cpp">
@@ -52,22 +40,10 @@
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Platformer.cpp">
-      <Filter>Game\Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\WinLevel.cpp">
-      <Filter>Game\Levels</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
       <Filter>Precompiled</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\MonkeyMovement.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\PlayerShip.h">
-      <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\TimedDeath.h">
       <Filter>Game\Behaviors</Filter>
@@ -75,13 +51,7 @@
     <ClInclude Include="Source\Archetypes.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Level2.h">
-      <Filter>Game\Levels</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Level1.h">
-      <Filter>Game\Levels</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Level3.h">
       <Filter>Game\Levels</Filter>
     </ClInclude>
     <ClInclude Include="Source\ColorChange.h">
@@ -95,12 +65,6 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
       <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platformer.h">
-      <Filter>Game\Levels</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\WinLevel.h">
-      <Filter>Game\Levels</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
