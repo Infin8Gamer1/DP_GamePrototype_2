@@ -21,13 +21,24 @@
 #include <Mesh.h>
 #include <Color.h>
 #include <Engine.h>
-#include "SoundManager.h"
+#include <Texture.h>
+#include <SpriteSource.h>
+#include <Tilemap.h>
 
 Levels::Level1::Level1() : Level("Level1")
 {
 	// Meshes
 	meshShip = nullptr;
 	meshBullet = nullptr;
+
+	// Tilemap
+	dataMap = nullptr;
+	textureMap = nullptr;
+	spriteSourceMap = nullptr;
+	meshMap = nullptr;
+
+	columnsMap = 4;
+	rowsMap = 3;
 }
 
 void Levels::Level1::Load()
@@ -38,11 +49,28 @@ void Levels::Level1::Load()
 
 	GameObject* Bullet = Archetypes::CreateBulletArchetype(meshBullet);
 	GetSpace()->GetObjectManager().AddArchetype(*Bullet);
+
+	//map
+	Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
+	meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
+
+	textureMap = Texture::CreateTextureFromFile("Tilemap.png");
+
+	spriteSourceMap = new SpriteSource(columnsMap, rowsMap, textureMap);
 }
 
 void Levels::Level1::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
+
+	dataMap = Tilemap::CreateTilemapFromFile("Assets/Levels/Level1.txt");
+	if (dataMap == nullptr)
+	{
+		std::cout << "Error Loading Tilemap!";
+	}
+
+	GameObject* Map = Archetypes::CreateLevel1Tilemap(meshMap, spriteSourceMap, dataMap);
+	GetSpace()->GetObjectManager().AddObject(*Map);
 
 	/*GameObject* Ship = Archetypes::CreateShip(meshShip);
 	GetSpace()->GetObjectManager().AddObject(*Ship);*/
@@ -70,4 +98,13 @@ void Levels::Level1::Unload()
 	meshShip = nullptr;
 	delete meshBullet;
 	meshBullet = nullptr;
+
+	delete dataMap;
+	dataMap = nullptr;
+	delete textureMap;
+	textureMap = nullptr;
+	delete spriteSourceMap;
+	spriteSourceMap = nullptr;
+	delete meshMap;
+	meshMap = nullptr;
 }

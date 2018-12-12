@@ -36,13 +36,6 @@ namespace Archetypes
 	//------------------------------------------------------------------------------
 	// Public Functions:
 	//------------------------------------------------------------------------------
-		
-	// Create the ship game object.
-	// Params:
-	//   mesh  = The mesh to use for the object's sprite.
-	// Returns:
-	//	 A pointer to the newly constructed game object
-	GameObject* CreateShip(Mesh* mesh);
 
 	// Create the archetype for the bullet object.
 	// Params:
@@ -50,14 +43,6 @@ namespace Archetypes
 	// Returns:
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateBulletArchetype(Mesh* mesh);
-
-	// Create the monkey game object.
-	// Params:
-	//   mesh  = The mesh to use for the object's sprite.
-	//   spriteSource = The sprite source to use for the object.
-	// Returns:
-	//	 A pointer to the newly constructed game object
-	GameObject* CreateMonkey(Mesh* mesh, SpriteSource* spriteSource);
 
 	// Create the circle game object.
 	// Params:
@@ -98,15 +83,7 @@ namespace Archetypes
 	//   map = The map to use for tilemap related components.
 	// Returns:
 	//   A pointer to the newly constructed game object.
-	GameObject* CreatePlatformerTilemapObject(Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
-
-	// Create the monkey game object.
-	// Params:
-	//   mesh  = The mesh to use for the object's sprite.
-	//   spriteSource = The sprite source to use for the object.
-	// Returns:
-	//	 A pointer to the newly constructed game object
-	GameObject* CreatePlatformerMonkey(Mesh* mesh, SpriteSource* spriteSource);
+	GameObject* CreateLevel1Tilemap(Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
 
 	// Create a collectable game object.
 	// Params:

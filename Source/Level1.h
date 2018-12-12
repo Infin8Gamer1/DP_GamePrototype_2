@@ -26,8 +26,11 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-class GameObject;
+class Texture;
 class Mesh;
+class SpriteSource;
+class GameObject;
+class Tilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -74,6 +77,15 @@ namespace Levels
 		// Title
 		static const unsigned titleStringLength = 20;
 		char windowTitle[titleStringLength];
+
+		// Tilemap
+		Tilemap* dataMap;
+		Texture* textureMap;
+		SpriteSource* spriteSourceMap;
+		Mesh* meshMap;
+
+		unsigned columnsMap;
+		unsigned rowsMap;
 	};
 }
 

@@ -157,11 +157,11 @@ GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteS
 	return tileMap;
 }
 
-GameObject * Archetypes::CreatePlatformerTilemapObject(Mesh * mesh, SpriteSource * spriteSource, Tilemap * map)
+GameObject * Archetypes::CreateLevel1Tilemap(Mesh * mesh, SpriteSource * spriteSource, Tilemap * map)
 {
-	GameObject* tileMap = new GameObject("tileMapPlatformer");
+	GameObject* tileMap = new GameObject("tileMapLevel1");
 	//transform
-	Vector2D scale = Vector2D(100, 100);
+	Vector2D scale = Vector2D(50, 50);
 	Transform* transform = new Transform(Vector2D(-(Graphics::GetInstance().GetScreenWorldDimensions().extents.x - (scale.x/2)), (Graphics::GetInstance().GetScreenWorldDimensions().extents.y - (scale.y / 2))), scale, 0.0f);
 	tileMap->AddComponent(transform);
 	//Sprite
