@@ -40,6 +40,12 @@
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PatrolAI.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utils.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -65,6 +71,13 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy.h">
       <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    
+	<ClInclude Include="Source\PatrolAI.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utils.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -27,6 +27,8 @@
 #include <list>
 #include <algorithm>
 
+#define M_PI_F (static_cast<float>(M_PI))
+
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 
