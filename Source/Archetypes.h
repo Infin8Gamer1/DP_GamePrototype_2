@@ -109,6 +109,8 @@ namespace Archetypes
 	GameObject* CreateEnemy(Mesh* mesh, SpriteSource* spriteSource, Vector2D translation = Vector2D(0,0), Vector2D scale = Vector2D(80, 80));
 
 	GameObject* CreateGameController();
+
+	GameObject* CreateCity(Mesh* mesh);
 }
 
 //----------------------------------------------------------------------------
