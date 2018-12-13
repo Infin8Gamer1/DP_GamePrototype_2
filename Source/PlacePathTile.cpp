@@ -26,7 +26,7 @@ void Behaviors::PlacePathTile::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 	//see if the player has clicked and has enough tiles
-	if (Input::GetInstance().CheckTriggered(VK_LBUTTON) && static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"))->GetAmountOfTiles() > 1) {
+	if (Input::GetInstance().CheckTriggered(VK_LBUTTON) && static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"))->GetAmountOfTiles() >= 1) {
 		SetTileToPath(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 	}
 }

@@ -80,6 +80,13 @@ void Levels::Level1::Initialize()
 	// Get the object manager for ease of use.
 	GameObjectManager& objectManager = GetSpace()->GetObjectManager();
 
+	//reload the tile map
+	dataMap = Tilemap::CreateTilemapFromFile("Assets/Levels/Level1.txt");
+	if (dataMap == nullptr)
+	{
+		std::cout << "Error Loading Tilemap!";
+	}
+
 	GameObject* Map = Archetypes::CreateLevel1Tilemap(meshMap, spriteSourceMap, dataMap);
 	objectManager.AddObject(*Map);
 
@@ -90,8 +97,8 @@ void Levels::Level1::Initialize()
 	static_cast<Physics*>(circle->GetComponent("Physics"))->SetVelocity(Vector2D(25.0f, -75.0f));
 	objectManager.AddObject(*circle);
 
-	/*GameObject* Ship = Archetypes::CreateShip(meshShip);
-	GetSpace()->GetObjectManager().AddObject(*Ship);*/
+	GameObject* gameController = Archetypes::CreateGameController();
+	objectManager.AddObject(*gameController);
 }
 
 void Levels::Level1::Update(float dt)

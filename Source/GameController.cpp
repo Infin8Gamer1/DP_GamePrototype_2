@@ -34,10 +34,10 @@ void GameController::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 
-	if (static_cast<Behaviors::PatrolAI*>(GetOwner()->GetComponent("PatrolAI"))->GetMoving() != true)
+	/*if (static_cast<Behaviors::PatrolAI*>(GetOwner()->GetComponent("PatrolAI"))->GetMoving() != true)
 	{
 		//Activate A* here
-	}
+	}*/
 }
 
 void GameController::SetAmountOfTiles(int tiles)
