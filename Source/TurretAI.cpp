@@ -117,7 +117,7 @@ namespace Behaviors
 
 		// I don't know calculus, so this is a good enough approximation of where the bullet will hit.
 		Vector2D target = position;
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			// Calculate how long it will take for the projectile to reach the current target.
 			float distance = translation.Distance(target);

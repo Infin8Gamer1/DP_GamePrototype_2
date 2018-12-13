@@ -43,9 +43,6 @@
     <ClCompile Include="Source\Utils.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TuretAI.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PlacePathTile.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
@@ -56,6 +53,9 @@
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
     <ClCompile Include="Source\SpriteText.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TurretAI.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
   </ItemGroup>
