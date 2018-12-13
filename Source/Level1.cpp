@@ -60,20 +60,12 @@ void Levels::Level1::Load()
 	objectManager.AddArchetype(*Bullet);
 
 	//map
-	dataMap = Tilemap::CreateTilemapFromFile("Assets/Levels/Level1.txt");
-	if (dataMap == nullptr)
-	{
-		std::cout << "Error Loading Tilemap!";
-	}
-	else
-	{
-		Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
-		meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
+	Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
+	meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
 
-		textureMap = Texture::CreateTextureFromFile("TilemapV2.png");
+	textureMap = Texture::CreateTextureFromFile("TilemapV2.png");
 
-		spriteSourceMap = new SpriteSource(columnsMap, rowsMap, textureMap);
-	}
+	spriteSourceMap = new SpriteSource(columnsMap, rowsMap, textureMap);
 }
 
 void Levels::Level1::Initialize()
@@ -121,24 +113,21 @@ void Levels::Level1::Update(float dt)
 void Levels::Level1::Shutdown()
 {
 	std::cout << GetName() << "::Shutdown" << std::endl;
+
+	delete dataMap;
+	dataMap = nullptr;
 }
 
 void Levels::Level1::Unload()
 {
 	std::cout << GetName() << "::Unload" << std::endl;
 
-	// If the map was successfully loaded, unload all of its resources.
-	if (dataMap != nullptr)
-	{
-		delete spriteSourceMap;
-		spriteSourceMap = nullptr;
-		delete textureMap;
-		textureMap = nullptr;
-		delete meshMap;
-		meshMap = nullptr;
-		delete dataMap;
-		dataMap = nullptr;
-	}
+	delete spriteSourceMap;
+	spriteSourceMap = nullptr;
+	delete textureMap;
+	textureMap = nullptr;
+	delete meshMap;
+	meshMap = nullptr;
 
 	delete spriteSourceTurretProjectile;
 	spriteSourceTurretProjectile = nullptr;
