@@ -25,44 +25,70 @@
 #include <SpriteSource.h>
 #include <Tilemap.h>
 
-Levels::Level1::Level1() : Level("Level1")
+Levels::Level1::Level1() : Level("Level1"), meshShip(nullptr), meshBullet(nullptr), dataMap(nullptr), textureMap(nullptr), spriteSourceMap(nullptr), meshMap(nullptr), columnsMap(4), rowsMap(3)
 {
-
-	// Tilemap
-	dataMap = nullptr;
-	textureMap = nullptr;
-	spriteSourceMap = nullptr;
-	meshMap = nullptr;
-
-	columnsMap = 4;
-	rowsMap = 3;
 }
 
 void Levels::Level1::Load()
 {
 	std::cout << GetName() << "::Load" << std::endl;
+	
+	// Create meshes.
+	meshShip = CreateTriangleMesh(Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1));
+	meshBullet = CreateTriangleMesh(Color(1, 0, 0), Color(1, 0, 0), Color(1, 0, 0));
+	meshQuadGeneric = CreateQuadMesh(Vector2D(1.0f, 1.0f), Vector2D(0.5f, 0.5f));
+
+	// Create textures.
+	textureTurret = Texture::CreateTextureFromFile("Turret.png");
+	textureTurretProjectile = Texture::CreateTextureFromFile("TurretProjectile.png");
+
+	// Create sprite sources.
+	spriteSourceTurret = new SpriteSource(1, 1, textureTurret);
+	spriteSourceTurretProjectile = new SpriteSource(1, 1, textureTurretProjectile);
+
+	// Get the object manager for ease of use.
+	GameObjectManager& objectManager = GetSpace()->GetObjectManager();
+
+	GameObject* projectileArchetype = Archetypes::CreateTurretProjectile(meshQuadGeneric, spriteSourceTurretProjectile);
+	objectManager.AddArchetype(*projectileArchetype);
+	objectManager.AddArchetype(*Archetypes::CreateTurret(projectileArchetype, meshQuadGeneric, spriteSourceTurret));
+
+	GameObject* Bullet = Archetypes::CreateBulletArchetype(meshBullet);
+	objectManager.AddArchetype(*Bullet);
 
 	//map
-	Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
-	meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
+	dataMap = Tilemap::CreateTilemapFromFile("Assets/Levels/Level1.txt");
+	if (dataMap == nullptr)
+	{
+		std::cout << "Error Loading Tilemap!";
+	}
+	else
+	{
+		Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
+		meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
 
-	textureMap = Texture::CreateTextureFromFile("TilemapV2.png");
+		textureMap = Texture::CreateTextureFromFile("TilemapV2.png");
 
-	spriteSourceMap = new SpriteSource(columnsMap, rowsMap, textureMap);
+		spriteSourceMap = new SpriteSource(columnsMap, rowsMap, textureMap);
+	}
 }
 
 void Levels::Level1::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	dataMap = Tilemap::CreateTilemapFromFile("Assets/Levels/Level1.txt");
-	if (dataMap == nullptr)
-	{
-		std::cout << "Error Loading Tilemap!";
-	}
+	// Get the object manager for ease of use.
+	GameObjectManager& objectManager = GetSpace()->GetObjectManager();
 
 	GameObject* Map = Archetypes::CreateLevel1Tilemap(meshMap, spriteSourceMap, dataMap);
-	GetSpace()->GetObjectManager().AddObject(*Map);
+	objectManager.AddObject(*Map);
+
+	objectManager.AddObject(*new GameObject(*objectManager.GetArchetypeByName("Turret")));
+
+	GameObject* circle = Archetypes::CreateCircle(meshQuadGeneric, spriteSourceTurret);
+	static_cast<Transform*>(circle->GetComponent("Transform"))->SetTranslation(Vector2D(100.0f, 200.0f));
+	static_cast<Physics*>(circle->GetComponent("Physics"))->SetVelocity(Vector2D(0.0f, -75.0f));
+	objectManager.AddObject(*circle);
 
 	/*GameObject* Ship = Archetypes::CreateShip(meshShip);
 	GetSpace()->GetObjectManager().AddObject(*Ship);*/
@@ -86,12 +112,34 @@ void Levels::Level1::Unload()
 {
 	std::cout << GetName() << "::Unload" << std::endl;
 
-	delete dataMap;
-	dataMap = nullptr;
-	delete textureMap;
-	textureMap = nullptr;
-	delete spriteSourceMap;
-	spriteSourceMap = nullptr;
-	delete meshMap;
-	meshMap = nullptr;
+	// If the map was successfully loaded, unload all of its resources.
+	if (dataMap != nullptr)
+	{
+		delete spriteSourceMap;
+		spriteSourceMap = nullptr;
+		delete textureMap;
+		textureMap = nullptr;
+		delete meshMap;
+		meshMap = nullptr;
+		delete dataMap;
+		dataMap = nullptr;
+	}
+
+	delete spriteSourceTurretProjectile;
+	spriteSourceTurretProjectile = nullptr;
+	delete spriteSourceTurret;
+	spriteSourceTurret = nullptr;
+
+	delete textureTurretProjectile;
+	textureTurretProjectile = nullptr;
+	delete textureTurret;
+	textureTurret = nullptr;
+
+	delete meshQuadGeneric;
+	meshQuadGeneric = nullptr;
+	delete meshBullet;
+	meshBullet = nullptr;
+	delete meshShip;
+	meshShip = nullptr;
+
 }

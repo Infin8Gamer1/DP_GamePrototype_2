@@ -119,7 +119,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\TimedDeath.cpp" />
-    <ClCompile Include="Source\Turet AI.cpp" />
+    <ClCompile Include="Source\TuretAI.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

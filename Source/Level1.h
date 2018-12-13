@@ -70,6 +70,19 @@ namespace Levels
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
+		// Meshes
+		Mesh* meshShip;
+		Mesh* meshBullet;
+		Mesh* meshQuadGeneric;
+
+		// Textures
+		Texture* textureTurret;
+		Texture* textureTurretProjectile;
+
+		// Sprite sources
+		SpriteSource* spriteSourceTurret;
+		SpriteSource* spriteSourceTurretProjectile;
+
 		// Title
 		static const unsigned titleStringLength = 20;
 		char windowTitle[titleStringLength];

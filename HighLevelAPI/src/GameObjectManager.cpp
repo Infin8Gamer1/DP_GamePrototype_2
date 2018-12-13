@@ -71,7 +71,7 @@ void GameObjectManager::AddObject(GameObject & _gameObject)
 	}
 	else {
 		std::cout << "added too many objects!" << std::endl;
-		//_gameObject.~GameObject();
+		delete &_gameObject;
 	}
 }
 
@@ -83,7 +83,7 @@ void GameObjectManager::AddArchetype(GameObject & _gameObject)
 	}
 	else {
 		std::cout << "added too many Archetypes!" << std::endl;
-		//_gameObject.~GameObject();
+		_gameObject.~GameObject();
 	}
 }
 
@@ -95,8 +95,27 @@ GameObject * GameObjectManager::GetObjectByName(const std::string & objectName) 
 			return gameObjectActiveList[i];
 		}
 	}
-	std::cout << "Couldn't find object with name of " << objectName << "." << std::endl;
+	//std::cout << "Couldn't find object with name of " << objectName << "." << std::endl;
 	return nullptr;
+}
+
+// Returns a vector of pointers to active game objects matching the specified name.
+// Params:
+//	 objectName = The name of the object to be returned, if found.
+// Returns:
+//   A vector of pointers to the named game objects.
+std::vector<GameObject*> GameObjectManager::GetAllObjectsByName(const std::string& objectName) const
+{
+	std::vector<GameObject*> objects;
+
+	for (size_t i = 0; i < numObjects; i++)
+	{
+		if (gameObjectActiveList[i]->GetName() == objectName) {
+			objects.push_back(gameObjectActiveList[i]);
+		}
+	}
+
+	return objects;
 }
 
 GameObject * GameObjectManager::GetArchetypeByName(const std::string & objectName) const
