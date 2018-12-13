@@ -203,7 +203,7 @@ namespace Archetypes
 		turret->AddComponent(sprite);
 
 		// Create a new turret AI.
-		turret->AddComponent(new Behaviors::TurretAI(projectileArchetype, 200.0f, 2.0f, 300.0f));
+		turret->AddComponent(new Behaviors::TurretAI(projectileArchetype, 2000.0f, 2.0f, 175.0f));
 
 		return turret;
 	}
