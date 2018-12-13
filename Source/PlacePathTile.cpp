@@ -56,6 +56,9 @@ void Behaviors::PlacePathTile::SetTileToPath(Vector2D MousePos)
 		//remove one from the number of tiles the player can place
 		GameController* gc = static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"));
 		gc->SetAmountOfTiles(gc->GetAmountOfTiles() - 1);
+
+		//add the point to the enemy path
+		gc->AddPointToEnemyPath(CT->ConvertTileMapCordsToWorldCords(Vector2D(static_cast<float>(tileX), static_cast<float>(tileY))));
 	}
 
 	

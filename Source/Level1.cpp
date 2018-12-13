@@ -101,7 +101,7 @@ void Levels::Level1::Initialize()
 	objectManager.AddObject(*circle);
 
 	GameObject* text = new GameObject(*objectManager.GetArchetypeByName("Text"));
-	static_cast<SpriteText*>(text->GetComponent("SpriteText"))->SetText("gamer time");
+	static_cast<SpriteText*>(text->GetComponent("SpriteText"))->SetText("Gamer Time");
 	static_cast<Transform*>(text->GetComponent("Transform"))->SetTranslation(Vector2D(0.0f, -200.0f));
 	objectManager.AddObject(*text);
 

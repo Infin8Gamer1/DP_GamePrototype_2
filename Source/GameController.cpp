@@ -11,10 +11,12 @@ Desc: The controller of the enemies
 #include "Space.h"
 #include "Tilemap.h"
 #include "PatrolAI.h"
+#include <ColliderTilemap.h>
 
 GameController::GameController()
 	:Component("GameController"), physics(nullptr), transform(nullptr), tilesAvailable(0)
 {
+	tilesAvailable = 1;
 }
 
 GameController::~GameController()
@@ -28,6 +30,10 @@ Component * GameController::Clone() const
 
 void GameController::Initialize()
 {
+	ColliderTilemap* CT = static_cast<ColliderTilemap*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("tileMapLevel1")->GetComponent("Collider"));
+	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(8, 0)));
+	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(8, 1)));
+	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(8, 2)));
 }
 
 void GameController::Update(float dt)
@@ -48,4 +54,19 @@ void GameController::SetAmountOfTiles(int tiles)
 int GameController::GetAmountOfTiles(void)
 {
 	return tilesAvailable;
+}
+
+void GameController::SetEnemyPath(std::vector<Vector2D> path)
+{
+	enemyPath = path;
+}
+
+std::vector<Vector2D> GameController::GetEnemyPath()
+{
+	return enemyPath;
+}
+
+void GameController::AddPointToEnemyPath(Vector2D point)
+{
+	enemyPath.push_back(point);
 }
