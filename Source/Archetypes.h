@@ -107,6 +107,8 @@ namespace Archetypes
 	// Returns:
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateEnemy(Mesh* mesh, SpriteSource* spriteSource, Vector2D translation = Vector2D(0,0), Vector2D scale = Vector2D(80, 80));
+
+	GameObject* CreateGameController();
 }
 
 //----------------------------------------------------------------------------

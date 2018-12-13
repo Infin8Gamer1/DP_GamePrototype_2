@@ -57,7 +57,7 @@ void Tilemap::SetCellValue(int column, int row, int newValue) const {
 
 	data[column][row] = newValue;
 
-	//loop through each value in the 2D array of tiles and print out its value
+	/*//loop through each value in the 2D array of tiles and print out its value
 	for (unsigned r = 0; r < GetHeight(); r++)
 	{
 		for (unsigned c = 0; c < GetWidth(); c++)
@@ -65,7 +65,7 @@ void Tilemap::SetCellValue(int column, int row, int newValue) const {
 			std::cout << GetCellValue(c, r) << " ";
 		}
 		std::cout << std::endl;
-	}
+	}*/
 }
 
 Tilemap * Tilemap::CreateTilemapFromFile(const std::string & filename)

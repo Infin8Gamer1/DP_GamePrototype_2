@@ -17,6 +17,7 @@ class GameController : public Component
 public:
 	GameController();
 	~GameController();
+	Component* Clone() const override;
 	void Initialize() override;
 	void Update(float dt) override;
 	void SetAmountOfTiles(int tiles);
