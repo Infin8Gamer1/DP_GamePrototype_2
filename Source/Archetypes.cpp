@@ -31,6 +31,7 @@
 #include "TurretAI.h"
 #include "SpriteText.h"
 #include "GameController.h"
+#include "PlaceTurretTile.h"
 
 namespace Archetypes
 {
@@ -164,6 +165,10 @@ namespace Archetypes
 		Behaviors::PlacePathTile* placePathTile = new Behaviors::PlacePathTile();
 		placePathTile->SetTilemap(map);
 		tileMap->AddComponent(placePathTile);
+		// Place turret tile
+		Behaviors::PlaceTurretTile* placeTurretTile = new Behaviors::PlaceTurretTile();
+		placeTurretTile->SetTilemap(map);
+		tileMap->AddComponent(placeTurretTile);
 
 		return tileMap;
 	}
@@ -289,6 +294,7 @@ namespace Archetypes
 		GameObject* gameController = new GameObject("GameController");
 		GameController* gc = new GameController();
 		gc->SetAmountOfTiles(1);
+		gc->SetAmountOfTurrets(1);
 		gameController->AddComponent(gc);
 
 		return gameController;
@@ -297,9 +303,12 @@ namespace Archetypes
 	{
 		GameObject* city = new GameObject("City");
 		Transform* transform = new Transform(Vector2D(100, 100), Vector2D(50,50), 0.f);
-		ColliderRectangle* collider = new ColliderRectangle(Vector2D(50 / 2.f, 50 / 2.f));
+		city->AddComponent(transform);
+		ColliderRectangle* collider = new ColliderRectangle(Vector2D(transform->GetScale().x / 2.f, transform->GetScale().y / 2.f));
+		city->AddComponent(collider);
 		Sprite* sprite = new Sprite();
 		sprite->SetMesh(mesh);
-		return nullptr;
+		city->AddComponent(sprite);
+		return city;
 	}
 };

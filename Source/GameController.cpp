@@ -14,7 +14,7 @@ Desc: The controller of the enemies
 #include <ColliderTilemap.h>
 
 GameController::GameController()
-	:Component("GameController"), physics(nullptr), transform(nullptr), tilesAvailable(0)
+	:Component("GameController"), physics(nullptr), transform(nullptr), tilesAvailable(0), turretsAvailable(0)
 {
 }
 

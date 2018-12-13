@@ -38,12 +38,15 @@ namespace Behaviors
 
 	void PlaceTurretTile::Initialize()
 	{
-		gameController = static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"));
+		
 	}
 
 	void PlaceTurretTile::Update(float dt)
 	{
 		UNREFERENCED_PARAMETER(dt);
+
+		GameController* gameController = static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"));
+
 		//see if the player has clicked and has enough tiles
 		if (Input::GetInstance().CheckTriggered(VK_RBUTTON) && gameController->GetAmountOfTurrets() >= 1) {
 			PlaceTurret(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
@@ -57,6 +60,8 @@ namespace Behaviors
 
 	void PlaceTurretTile::PlaceTurret(Vector2D mousePos)
 	{
+		GameController* gameController = static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"));
+
 		ColliderTilemap* colliderTilemap = static_cast<ColliderTilemap*>(GetOwner()->GetComponent("Collider"));
 		Vector2D tile = colliderTilemap->ConvertWorldCordsToTileMapCords(mousePos);
 
@@ -64,9 +69,11 @@ namespace Behaviors
 		int tileY = static_cast<int>(tile.y);
 
 		//if the chosen path tile is a path then return
-		if (map->GetCellValue(tileX, tileY) <= 2) {
+		if (map->GetCellValue(tileX, tileY) > 2) {
 			return;
 		}
+
+		Vector2D worldTile = colliderTilemap->ConvertTileMapCordsToWorldCords(tile);
 
 		GameObjectManager& objectManager = GetOwner()->GetSpace()->GetObjectManager();
 
@@ -74,12 +81,12 @@ namespace Behaviors
 		for (GameObject* turret : turrets)
 		{
 			Vector2D turretTileCoords = colliderTilemap->ConvertWorldCordsToTileMapCords(static_cast<Transform*>(turret->GetComponent("Transform"))->GetTranslation());
-			if (tile.Distance(turretTileCoords) <= 25.0f)
+			if (worldTile.Distance(turretTileCoords) <= 25.0f)
 				return;
 		}
 
-		GameObject* turret = objectManager.GetArchetypeByName("Turret");
-		static_cast<Transform*>(turret->GetComponent("Transform"))->SetTranslation(colliderTilemap->ConvertTileMapCordsToWorldCords(tile));
+		GameObject* turret = new GameObject(*objectManager.GetArchetypeByName("Turret"));
+		static_cast<Transform*>(turret->GetComponent("Transform"))->SetTranslation(worldTile);
 		objectManager.AddObject(*turret);
 
 		// Decrement the number of turrets the player can place.

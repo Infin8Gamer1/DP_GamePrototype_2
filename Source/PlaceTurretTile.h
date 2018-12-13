@@ -25,6 +25,7 @@
 
 class Tilemap;
 class Vector2D;
+class GameController;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -71,7 +72,6 @@ namespace Behaviors
 
 		// Components
 		const Tilemap* map;
-		GameController* gameController;
 	};
 }
 
