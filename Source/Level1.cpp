@@ -24,6 +24,7 @@
 #include <Texture.h>
 #include <SpriteSource.h>
 #include <Tilemap.h>
+#include "SpriteText.h"
 
 Levels::Level1::Level1() : Level("Level1"), meshShip(nullptr), meshBullet(nullptr), dataMap(nullptr), textureMap(nullptr), spriteSourceMap(nullptr), meshMap(nullptr), columnsMap(4), rowsMap(3)
 {
@@ -52,6 +53,8 @@ void Levels::Level1::Load()
 	GameObject* projectileArchetype = Archetypes::CreateTurretProjectile(meshQuadGeneric, spriteSourceTurretProjectile);
 	objectManager.AddArchetype(*projectileArchetype);
 	objectManager.AddArchetype(*Archetypes::CreateTurret(projectileArchetype, meshQuadGeneric, spriteSourceTurret));
+
+	objectManager.AddArchetype(*Archetypes::CreateText());
 
 	GameObject* Bullet = Archetypes::CreateBulletArchetype(meshBullet);
 	objectManager.AddArchetype(*Bullet);
@@ -89,6 +92,11 @@ void Levels::Level1::Initialize()
 	static_cast<Transform*>(circle->GetComponent("Transform"))->SetTranslation(Vector2D(000.0f, 200.0f));
 	static_cast<Physics*>(circle->GetComponent("Physics"))->SetVelocity(Vector2D(25.0f, -75.0f));
 	objectManager.AddObject(*circle);
+
+	GameObject* text = new GameObject(*objectManager.GetArchetypeByName("Text"));
+	static_cast<SpriteText*>(text->GetComponent("SpriteText"))->SetText("gamer time");
+	static_cast<Transform*>(text->GetComponent("Transform"))->SetTranslation(Vector2D(0.0f, -200.0f));
+	objectManager.AddObject(*text);
 
 	/*GameObject* Ship = Archetypes::CreateShip(meshShip);
 	GetSpace()->GetObjectManager().AddObject(*Ship);*/

@@ -29,6 +29,7 @@
 #include <Graphics.h>
 #include "PlacePathTile.h"
 #include "TurretAI.h"
+#include "SpriteText.h"
 
 namespace Archetypes
 {
@@ -166,19 +167,29 @@ namespace Archetypes
 		return tileMap;
 	}
 
-	GameObject * CreateText(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation, Vector2D scale)
+	// Create a text game object.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//   spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object.
+	GameObject* CreateText()
 	{
-		GameObject* Text = new GameObject("Text");
-		//transform
-		Transform* transform = new Transform(translation, scale, 0.0f);
-		Text->AddComponent(transform);
-		//Sprite
-		Sprite* sprite = new Sprite();
-		sprite->SetMesh(mesh);
-		sprite->SetSpriteSource(spriteSource);
-		Text->AddComponent(sprite);
+		// Create a new game object.
+		GameObject* text = new GameObject("Text");
 
-		return Text;
+		// Create a new transform.
+		Transform* transform = new Transform(0.0f, 0.0f);
+		transform->SetScale(Vector2D(64.0f, 64.0f));
+		text->AddComponent(transform);
+
+		// Create a new sprite text.
+		SpriteText* spriteText = new SpriteText();
+		spriteText->SetHorizontalAlignment(SpriteText::Alignment::CENTER);
+		spriteText->SetVerticalAlignment(SpriteText::Alignment::CENTER);
+		text->AddComponent(spriteText);
+
+		return text;
 	}
 
 	// Create a turret game object.
