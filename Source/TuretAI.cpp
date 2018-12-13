@@ -115,30 +115,20 @@ namespace Behaviors
 	{
 		Vector2D translation = transform->GetTranslation();
 
-		// The following is ripped from this stackoverflow post: https://stackoverflow.com/questions/17204513/how-to-find-the-interception-coordinates-of-a-moving-target-in-3d-space
-		// FIXME: this doesn't work lol
-		float a = velocity.MagnitudeSquared() - projectileSpeed * projectileSpeed;
-		float b = 2 * ((position.x * velocity.x) + (position.y * velocity.y) - (translation.x * velocity.x) - (translation.y * velocity.y));
-		float c = position.MagnitudeSquared() + translation.MagnitudeSquared() - (2 * translation.x * position.x) - (2 * translation.y * position.y);
+		// I don't know calculus, so this is a good enough approximation of where the bullet will hit.
+		Vector2D target = position;
+		for (int i = 0; i < 4; i++)
+		{
+			// Calculate how long it will take for the projectile to reach the current target.
+			float distance = translation.Distance(target);
+			float timeToReach = distance / projectileSpeed;
 
-		float t1 = (-b + sqrt((b * b) - (4 * a * c))) / (2 * a);
-		float t2 = (-b - sqrt((b * b) - (4 * a * c))) / (2 * a);
-
-		float t = t1;
-
-		if (t <= 0.0f || isnan(t))
-			t = t2;
-		else if (t2 > 0.0f)
-			t = min(t, t2);
-
-		if (t <= 0.0f || isnan(t))
-			return;
-
-		// So, somehow we got here, with a velocity which will make the projectile aim at where the enemy will be.
-		Vector2D projectileVelocity = (position - translation + (t * projectileSpeed * velocity)) / (t * projectileSpeed);
+			// Extrapolate the intersection position and use it as the new target.
+			target = position + velocity * timeToReach;
+		}
 
 		// Calculate the direction towards the specified position.
-		//Vector2D direction = (position - transform->GetTranslation()).Normalized();
+		Vector2D projectileVelocity = (target - transform->GetTranslation()).Normalized() * projectileSpeed;
 
 		GameObject* projectile = new GameObject(*projectileArchetype);
 

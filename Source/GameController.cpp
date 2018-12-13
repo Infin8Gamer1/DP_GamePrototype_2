@@ -9,9 +9,11 @@ Desc: The controller of the enemies
 #include "Physics.h"
 #include "Transform.h"
 #include "Space.h"
+#include "Tilemap.h"
+#include "PatrolAI.h"
 
 GameController::GameController()
-	:Component("GameController"), physics(nullptr), transform(nullptr)
+	:Component("GameController"), physics(nullptr), transform(nullptr), tilesAvailable(0)
 {
 }
 
@@ -27,12 +29,18 @@ void GameController::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 
-	if (physics->GetVelocity().x == 0 && physics->GetVelocity().y == 0)
+	if (static_cast<Behaviors::PatrolAI*>(GetOwner()->GetComponent("PatrolAI"))->GetMoving() != true)
 	{
-		//check to see if place is moveable
-			//if moveable find moveable space and move accordingly
-		//if path has ended, update current state of enemy
-			//find the nearest city
-		//go to the A* pathfinding for city
+		//Activate A* here
 	}
+}
+
+void GameController::SetAmountOfTiles(int tiles)
+{
+	tilesAvailable = tiles;
+}
+
+int GameController::GetAmountOfTiles(void)
+{
+	return tilesAvailable;
 }
