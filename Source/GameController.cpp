@@ -16,7 +16,6 @@ Desc: The controller of the enemies
 GameController::GameController()
 	:Component("GameController"), physics(nullptr), transform(nullptr), tilesAvailable(0)
 {
-	tilesAvailable = 1;
 }
 
 GameController::~GameController()

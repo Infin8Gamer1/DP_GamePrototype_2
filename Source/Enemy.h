@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	ColorChange.h
-// Author(s):	Jeremy Kings (j.kings)
+// File Name:	Enemy.h
+// Author(s):	David Cohen (david.cohen)
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
 //
@@ -16,7 +16,8 @@
 //------------------------------------------------------------------------------
 
 #include "Component.h" // base class
-#include <Color.h>	 // Color
+
+#include "Vector2D.h" // Vector2D
 
 //------------------------------------------------------------------------------
 
@@ -24,11 +25,7 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-class Sprite;
-class Transform;
-class Physics;
-class Animation;
-struct MapCollision;
+typedef class Transform Transform;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -36,27 +33,8 @@ struct MapCollision;
 
 namespace Behaviors
 {
-	enum InnerStates
-	{
-		InnerStateEnter,
-		InnerStateUpdate,
-		InnerStateExit
-	};
-
-	enum EnemyStates
-	{
-		StateIdle,
-		StateWander,
-		StateChase
-	};
-
-	enum EnemyWanderDirections
-	{
-		Left,
-		Right,
-		Jump,
-		Last
-	};
+	typedef class PatrolAI PatrolAI;
+	typedef class AStarPath AStarPath;
 
 	class Enemy : public Component
 	{
@@ -66,58 +44,33 @@ namespace Behaviors
 		//------------------------------------------------------------------------------
 
 		// Constructor
+		// Params:
+		//   projectileDelay = How long the turret should wait between firing.
 		Enemy();
 
-		// Return a new copy of the component.
-		Component* Clone() const;
+		// Clone a component and return a pointer to the cloned component.
+		// Returns:
+		//   A pointer to a dynamically allocated clone of the component.
+		Component* Clone() const override;
 
 		// Initialize data for this object.
-		void Initialize();
+		void Initialize() override;
 
 		// Update function for this component.
 		// Params:
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
-		// Sets the next state of the enemy.
-		// Params:
-		//   nextState = The next state the enemy should be in.
-		void SetState(EnemyStates nextState);
-
-		// Map collision handler for Monkey objects.
-		// Params:
-		//   object = The monkey object.
-		//   collision = Which sides the monkey collided on.
-		friend void EnemyMapCollisionHandler(GameObject& object,
-			const MapCollision& collision);
-
 	private:
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		EnemyStates currentState;  // The current state of the enemy. Ex: idle, wander, chase
-		EnemyStates nextState;		// The next state of the enemy.
-
-		InnerStates innerState; // The inner state of the current state. Ex: enter, update, exit
-		
-		EnemyWanderDirections wanderDirection; //the direction to wander
-		EnemyWanderDirections previousWanderDirection; //the direction to wander
-
-		float timer; // Used for delaying state changes, etc.
-		float stateChangeTime; // Amount of time to wait before changing states.
-
-		bool onGround;
-		bool onWallLeft;
-		bool onWallRight;
-
-		const Color normalColor = Color(1,1,1,1);
-		const Color madColor = Color(1,0,0,1);
-
 		// Components
 		Transform* transform;
-		Physics* physics;
-		Animation* animation;
-		Sprite* sprite;
+		PatrolAI* patrolAI;
+		AStarPath* aStarPath;
 	};
 }
+
+//------------------------------------------------------------------------------
