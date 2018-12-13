@@ -10,6 +10,7 @@ Desc: The controller of the enemies
 
 typedef class Transform Transform;
 typedef class Physics Physics;
+typedef class Tilemap Tilemap;
 
 class GameController : public Component
 {
@@ -18,7 +19,12 @@ public:
 	~GameController();
 	void Initialize() override;
 	void Update(float dt) override;
+	void SetAmountOfTiles(int tiles);
+	int GetAmountOfTiles(void);
 private:
 	Physics* physics;
 	Transform* transform;
+	Tilemap* tilemap;
+	int tilesAvailable;
+
 };
