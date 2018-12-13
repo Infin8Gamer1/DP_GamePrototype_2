@@ -29,6 +29,7 @@
 #include <Graphics.h>
 #include "PlacePathTile.h"
 #include "TurretAI.h"
+#include "GameController.h"
 
 namespace Archetypes
 {
@@ -269,5 +270,16 @@ namespace Archetypes
 		enemy->AddComponent(enemyComponent);
 
 		return enemy;
+	}
+
+
+	GameObject * CreateGameController()
+	{
+		GameObject* gameController = new GameObject("GameController");
+		GameController* gc = new GameController();
+		gc->SetAmountOfTiles(1);
+		gameController->AddComponent(gc);
+
+		return gameController;
 	}
 };

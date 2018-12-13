@@ -21,6 +21,11 @@ GameController::~GameController()
 {
 }
 
+Component * GameController::Clone() const
+{
+	return new GameController(*this);
+}
+
 void GameController::Initialize()
 {
 }
