@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{553D497C-DD10-4B3D-9F5A-CC4267744407}</ProjectGuid>
-    <RootNamespace>CS230Lab8</RootNamespace>
+    <RootNamespace>CD_Projekt_Sand</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <ProjectName>CD_Projekt_Sand</ProjectName>
   </PropertyGroup>
@@ -109,6 +109,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\BulletMovement.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\GameController.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\PatrolAI.cpp" />
@@ -127,6 +128,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\BulletMovement.h" />
     <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\GameController.h" />
     <ClInclude Include="Source\Level1.h" />
     <ClInclude Include="Source\PatrolAI.h" />
     <ClInclude Include="Source\PlacePathTile.h" />
