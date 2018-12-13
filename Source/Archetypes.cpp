@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
 // File Name:	Archetypes.cpp
-// Author(s):	Jacob Holyfield
+// Author(s):	Jacob Holyfield, Tyler Miller, David Cohen
 // Project:		BetaEngine
 // Course:		CS230
 //
@@ -292,5 +292,14 @@ namespace Archetypes
 		gameController->AddComponent(gc);
 
 		return gameController;
+	}
+	GameObject * CreateCity(Mesh * mesh)
+	{
+		GameObject* city = new GameObject("City");
+		Transform* transform = new Transform(Vector2D(100, 100), Vector2D(50,50), 0.f);
+		ColliderRectangle* collider = new ColliderRectangle(Vector2D(50 / 2.f, 50 / 2.f));
+		Sprite* sprite = new Sprite();
+		sprite->SetMesh(mesh);
+		return nullptr;
 	}
 };
