@@ -14,7 +14,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{553D497C-DD10-4B3D-9F5A-CC4267744407}</ProjectGuid>
     <RootNamespace>CS230Lab8</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -108,6 +108,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\BulletMovement.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\GameController.cpp" />
     <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\Level3.cpp" />
@@ -130,6 +131,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\BulletMovement.h" />
     <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\GameController.h" />
     <ClInclude Include="Source\Level2.h" />
     <ClInclude Include="Source\Level1.h" />
     <ClInclude Include="Source\Level3.h" />
