@@ -23,6 +23,8 @@ public:
 	void Update(float dt) override;
 	void SetAmountOfTiles(int tiles);
 	int GetAmountOfTiles(void);
+	void SetAmountOfTurrets(int turrets);
+	int GetAmountOfTurrets(void);
 	void SetEnemyPath(std::vector<Vector2D> path);
 	std::vector<Vector2D> GetEnemyPath();
 	void AddPointToEnemyPath(Vector2D point);
@@ -31,6 +33,7 @@ private:
 	Transform* transform;
 	Tilemap* tilemap;
 	int tilesAvailable;
+	int turretsAvailable;
 	std::vector<Vector2D> enemyPath;
 
 };

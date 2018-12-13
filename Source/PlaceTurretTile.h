@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	ScreenWrap.h
-// Author(s):	Jeremy Kings (j.kings)
+// File Name:	PlaceTurretTile.h
+// Author(s):	David Cohen (david.cohen)
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
 //
@@ -33,7 +33,7 @@ class Vector2D;
 namespace Behaviors
 {
 
-	class PlacePathTile : public Component
+	class PlaceTurretTile : public Component
 	{
 	public:
 		//------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ namespace Behaviors
 		//------------------------------------------------------------------------------
 
 		// Default constructor
-		PlacePathTile();
+		PlaceTurretTile();
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -59,6 +59,9 @@ namespace Behaviors
 		void SetTilemap(const Tilemap * _map);
 
 	private:
+		//------------------------------------------------------------------------------
+		// Private Functions:
+		//------------------------------------------------------------------------------
 
 		void PlaceTurret(Vector2D MousePos);
 
@@ -68,6 +71,7 @@ namespace Behaviors
 
 		// Components
 		const Tilemap* map;
+		GameController* gameController;
 	};
 }
 

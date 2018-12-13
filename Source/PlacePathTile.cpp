@@ -27,7 +27,7 @@ void Behaviors::PlacePathTile::Update(float dt)
 	UNREFERENCED_PARAMETER(dt);
 	//see if the player has clicked and has enough tiles
 	if (Input::GetInstance().CheckTriggered(VK_LBUTTON) && static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"))->GetAmountOfTiles() >= 1) {
-		SetTileToPath(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
+		PlaceTurret(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 	}
 }
 
@@ -36,7 +36,7 @@ void Behaviors::PlacePathTile::SetTilemap(const Tilemap * _map)
 	map = _map;
 }
 
-void Behaviors::PlacePathTile::SetTileToPath(Vector2D MousePos)
+void Behaviors::PlacePathTile::PlaceTurret(Vector2D MousePos)
 {
 	ColliderTilemap* CT = static_cast<ColliderTilemap*>(GetOwner()->GetComponent("Collider"));
 	Vector2D tile = CT->ConvertWorldCordsToTileMapCords(MousePos);

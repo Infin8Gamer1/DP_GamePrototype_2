@@ -58,6 +58,9 @@
     <ClCompile Include="Source\TurretAI.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PlaceTurretTile.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -100,6 +103,9 @@
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\SpriteText.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlaceTurretTile.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>

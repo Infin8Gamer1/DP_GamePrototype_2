@@ -55,6 +55,16 @@ int GameController::GetAmountOfTiles(void)
 	return tilesAvailable;
 }
 
+void GameController::SetAmountOfTurrets(int turrets)
+{
+	turretsAvailable = turrets;
+}
+
+int GameController::GetAmountOfTurrets(void)
+{
+	return turretsAvailable;
+}
+
 void GameController::SetEnemyPath(std::vector<Vector2D> path)
 {
 	enemyPath = path;
