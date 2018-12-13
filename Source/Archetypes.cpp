@@ -140,38 +140,38 @@ namespace Archetypes
 		return circle;
 	}
 
-GameObject * Archetypes::CreateLevel1Tilemap(Mesh * mesh, SpriteSource * spriteSource, Tilemap * map)
-{
-	GameObject* tileMap = new GameObject("tileMapLevel1");
-	//transform
-	Vector2D scale = Vector2D(50, 50);
-	Transform* transform = new Transform(Vector2D(-(Graphics::GetInstance().GetScreenWorldDimensions().extents.x - (scale.x/2)), (Graphics::GetInstance().GetScreenWorldDimensions().extents.y - (scale.y / 2))), scale, 0.0f);
-	tileMap->AddComponent(transform);
-	//Sprite
-	SpriteTilemap* sprite = new SpriteTilemap();
-	sprite->SetMesh(mesh);
-	sprite->SetSpriteSource(spriteSource);
-	sprite->SetTilemap(map);
-	tileMap->AddComponent(sprite);
-	//Collider Tilemap
-	ColliderTilemap* colliderTilemap = new ColliderTilemap();
-	colliderTilemap->SetTilemap(map);
-	tileMap->AddComponent(colliderTilemap);
+	GameObject * CreateLevel1Tilemap(Mesh * mesh, SpriteSource * spriteSource, Tilemap * map)
+	{
+		GameObject* tileMap = new GameObject("tileMapLevel1");
+		//transform
+		Vector2D scale = Vector2D(50, 50);
+		Transform* transform = new Transform(Vector2D(-(Graphics::GetInstance().GetScreenWorldDimensions().extents.x - (scale.x/2)), (Graphics::GetInstance().GetScreenWorldDimensions().extents.y - (scale.y / 2))), scale, 0.0f);
+		tileMap->AddComponent(transform);
+		//Sprite
+		SpriteTilemap* sprite = new SpriteTilemap();
+		sprite->SetMesh(mesh);
+		sprite->SetSpriteSource(spriteSource);
+		sprite->SetTilemap(map);
+		tileMap->AddComponent(sprite);
+		//Collider Tilemap
+		ColliderTilemap* colliderTilemap = new ColliderTilemap();
+		colliderTilemap->SetTilemap(map);
+		tileMap->AddComponent(colliderTilemap);
 
 		return tileMap;
 	}
 
-GameObject * Archetypes::CreateText(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation, Vector2D scale)
-{
-	GameObject* Text = new GameObject("Text");
-	//transform
-	Transform* transform = new Transform(translation, scale, 0.0f);
-	Text->AddComponent(transform);
-	//Sprite
-	Sprite* sprite = new Sprite();
-	sprite->SetMesh(mesh);
-	sprite->SetSpriteSource(spriteSource);
-	Text->AddComponent(sprite);
+	GameObject * CreateText(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation, Vector2D scale)
+	{
+		GameObject* Text = new GameObject("Text");
+		//transform
+		Transform* transform = new Transform(translation, scale, 0.0f);
+		Text->AddComponent(transform);
+		//Sprite
+		Sprite* sprite = new Sprite();
+		sprite->SetMesh(mesh);
+		sprite->SetSpriteSource(spriteSource);
+		Text->AddComponent(sprite);
 
 		return Text;
 	}

@@ -67,7 +67,7 @@ void Levels::Level1::Load()
 		Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
 		meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
 
-	textureMap = Texture::CreateTextureFromFile("TilemapV2.png");
+		textureMap = Texture::CreateTextureFromFile("TilemapV2.png");
 
 		spriteSourceMap = new SpriteSource(columnsMap, rowsMap, textureMap);
 	}
