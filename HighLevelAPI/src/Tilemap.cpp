@@ -116,8 +116,6 @@ int ** Tilemap::ReadArrayVariable(std::ifstream & file, const std::string & name
 	int ** data = new int *[columns];
 	for (int r = 0; r < columns; ++r)
 	{
-		//warning creates memory leak!
-		//TODO: FIX MEMORY LEAK FROM THIS!
 		data[r] = new int[rows];
 	}
 
