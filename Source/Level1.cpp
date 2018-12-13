@@ -105,8 +105,6 @@ void Levels::Level1::Initialize()
 	static_cast<Transform*>(text->GetComponent("Transform"))->SetTranslation(Vector2D(0.0f, -200.0f));
 	objectManager.AddObject(*text);
 
-	/*GameObject* Ship = Archetypes::CreateShip(meshShip);
-	GetSpace()->GetObjectManager().AddObject(*Ship);*/
 	GameObject* gameController = Archetypes::CreateGameController();
 	objectManager.AddObject(*gameController);
 }
