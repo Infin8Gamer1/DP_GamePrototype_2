@@ -32,5 +32,4 @@ private:
 	Tilemap* tilemap;
 	int tilesAvailable;
 	std::vector<Vector2D> enemyPath;
-
 };
