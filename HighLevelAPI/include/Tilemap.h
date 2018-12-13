@@ -63,6 +63,8 @@ public:
 	//   or a positive integer otherwise.
 	int GetCellValue(int column, int row) const;
 
+	void SetCellValue(int column, int row, int newValue) const;
+
 	// Create a tilemap from the given file.
 	// Params:
 	//   filename = The name of the file containing the tilemap data.

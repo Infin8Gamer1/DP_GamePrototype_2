@@ -27,6 +27,7 @@
 #include "ColliderTilemap.h"
 #include "Enemy.h"
 #include <Graphics.h>
+#include "PlacePathTile.h"
 
 GameObject * Archetypes::CreateBulletArchetype(Mesh * mesh)
 {
@@ -154,6 +155,10 @@ GameObject * Archetypes::CreateLevel1Tilemap(Mesh * mesh, SpriteSource * spriteS
 	ColliderTilemap* colliderTilemap = new ColliderTilemap();
 	colliderTilemap->SetTilemap(map);
 	tileMap->AddComponent(colliderTilemap);
+	//Place Path Tile
+	Behaviors::PlacePathTile* placePathTile = new Behaviors::PlacePathTile();
+	placePathTile->SetTilemap(map);
+	tileMap->AddComponent(placePathTile);
 
 	return tileMap;
 }

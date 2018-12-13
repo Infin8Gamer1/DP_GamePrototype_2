@@ -76,6 +76,8 @@ public:
 
 	Vector2D ConvertTileMapCordsToWorldCords(Vector2D inputCords);
 
+	Vector2D ConvertWorldCordsToTileMapCords(Vector2D inputCords);
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:
