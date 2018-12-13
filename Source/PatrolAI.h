@@ -101,6 +101,11 @@ namespace Behaviors
 		//   loopMode = The new loop mode.
 		void SetLoopMode(LoopMode loopMode);
 
+		// Sets the path.
+		// Params:
+		//   path = The path to follow.
+		void SetPath(std::vector<Vector2D> path);
+
 		// Clears the path.
 		void ClearPath();
 

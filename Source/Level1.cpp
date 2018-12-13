@@ -86,8 +86,8 @@ void Levels::Level1::Initialize()
 	objectManager.AddObject(*new GameObject(*objectManager.GetArchetypeByName("Turret")));
 
 	GameObject* circle = Archetypes::CreateCircle(meshQuadGeneric, spriteSourceTurret);
-	static_cast<Transform*>(circle->GetComponent("Transform"))->SetTranslation(Vector2D(100.0f, 200.0f));
-	static_cast<Physics*>(circle->GetComponent("Physics"))->SetVelocity(Vector2D(0.0f, -75.0f));
+	static_cast<Transform*>(circle->GetComponent("Transform"))->SetTranslation(Vector2D(000.0f, 200.0f));
+	static_cast<Physics*>(circle->GetComponent("Physics"))->SetVelocity(Vector2D(25.0f, -75.0f));
 	objectManager.AddObject(*circle);
 
 	/*GameObject* Ship = Archetypes::CreateShip(meshShip);

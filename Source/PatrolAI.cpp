@@ -154,6 +154,15 @@ namespace Behaviors
 		loopMode = loopMode_;
 	}
 
+	// Sets the path.
+	// Params:
+	//   path = The path to follow.
+	void PatrolAI::SetPath(std::vector<Vector2D> path_)
+	{
+		path = path_;
+		pathSize = static_cast<unsigned>(path.size());
+	}
+
 	// Clears the path.
 	void PatrolAI::ClearPath()
 	{
@@ -253,8 +262,11 @@ namespace Behaviors
 				movingForwards = false;
 				nextPathIndex = pathIndex - 1;
 				break;
+			case LoopMode::STOP:
+				// Stop moving.
+				moving = false;
+				break;
 			}
-			// Take no action if the loop mode is STOP.
 		}
 		else
 		{
@@ -269,8 +281,11 @@ namespace Behaviors
 				movingForwards = true;
 				nextPathIndex = pathIndex + 1;
 				break;
+			case LoopMode::STOP:
+				// Stop moving.
+				moving = false;
+				break;
 			}
-			// Take no action if the loop mode is STOP.
 		}
 	}
 
