@@ -35,5 +35,4 @@ private:
 	int tilesAvailable;
 	int turretsAvailable;
 	std::vector<Vector2D> enemyPath;
-
 };
