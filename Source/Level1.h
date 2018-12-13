@@ -26,9 +26,11 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-class GameObject;
+class Texture;
 class Mesh;
-class SoundManager;
+class SpriteSource;
+class GameObject;
+class Tilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -71,14 +73,28 @@ namespace Levels
 		// Meshes
 		Mesh* meshShip;
 		Mesh* meshBullet;
+		Mesh* meshQuadGeneric;
+
+		// Textures
+		Texture* textureTurret;
+		Texture* textureTurretProjectile;
+
+		// Sprite sources
+		SpriteSource* spriteSourceTurret;
+		SpriteSource* spriteSourceTurretProjectile;
 
 		// Title
 		static const unsigned titleStringLength = 20;
 		char windowTitle[titleStringLength];
 
-		// Sound manager
-		SoundManager* soundManager;
-		FMOD::Channel* musicChannel;
+		// Tilemap
+		Tilemap* dataMap;
+		Texture* textureMap;
+		SpriteSource* spriteSourceMap;
+		Mesh* meshMap;
+
+		unsigned columnsMap;
+		unsigned rowsMap;
 	};
 }
 

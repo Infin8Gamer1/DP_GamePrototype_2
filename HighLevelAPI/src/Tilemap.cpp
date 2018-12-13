@@ -49,6 +49,25 @@ int Tilemap::GetCellValue(int column, int row) const
 	return data[column][row];
 }
 
+void Tilemap::SetCellValue(int column, int row, int newValue) const {
+	//if given row or column is outside of the array then just return
+	if ((column >= numColumns || column < 0) || (row >= numRows || row < 0)) {
+		return;
+	}
+
+	data[column][row] = newValue;
+
+	//loop through each value in the 2D array of tiles and print out its value
+	for (unsigned r = 0; r < GetHeight(); r++)
+	{
+		for (unsigned c = 0; c < GetWidth(); c++)
+		{
+			std::cout << GetCellValue(c, r) << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+
 Tilemap * Tilemap::CreateTilemapFromFile(const std::string & filename)
 {
 	std::ifstream infile(filename);
@@ -79,7 +98,7 @@ Tilemap * Tilemap::CreateTilemapFromFile(const std::string & filename)
 	{
 		for (unsigned c = 0; c < output->GetWidth(); c++)
 		{
-			std::cout << output->GetCellValue(c, r) << "   ";
+			std::cout << output->GetCellValue(c, r) << " ";
 		}
 		std::cout << std::endl;
 	}
@@ -116,8 +135,6 @@ int ** Tilemap::ReadArrayVariable(std::ifstream & file, const std::string & name
 	int ** data = new int *[columns];
 	for (int r = 0; r < columns; ++r)
 	{
-		//warning creates memory leak!
-		//TODO: FIX MEMORY LEAK FROM THIS!
 		data[r] = new int[rows];
 	}
 

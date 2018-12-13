@@ -36,13 +36,6 @@ namespace Archetypes
 	//------------------------------------------------------------------------------
 	// Public Functions:
 	//------------------------------------------------------------------------------
-		
-	// Create the ship game object.
-	// Params:
-	//   mesh  = The mesh to use for the object's sprite.
-	// Returns:
-	//	 A pointer to the newly constructed game object
-	GameObject* CreateShip(Mesh* mesh);
 
 	// Create the archetype for the bullet object.
 	// Params:
@@ -50,14 +43,6 @@ namespace Archetypes
 	// Returns:
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateBulletArchetype(Mesh* mesh);
-
-	// Create the monkey game object.
-	// Params:
-	//   mesh  = The mesh to use for the object's sprite.
-	//   spriteSource = The sprite source to use for the object.
-	// Returns:
-	//	 A pointer to the newly constructed game object
-	GameObject* CreateMonkey(Mesh* mesh, SpriteSource* spriteSource);
 
 	// Create the circle game object.
 	// Params:
@@ -81,15 +66,6 @@ namespace Archetypes
 	// Returns:
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateRectangle(Mesh* mesh);
-	
-	// Create a tilemap object
-	// Params:
-	//   mesh = The mesh to use for the sprite.
-	//   spriteSource = The sprite source to use for the sprite.
-	//   map = The map to use for tilemap related components.
-	// Returns:
-	//   A pointer to the newly constructed game object.
-	GameObject* CreateTilemapObject(Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
 
 	// Create a tilemap object for the Platformer level
 	// Params:
@@ -98,23 +74,7 @@ namespace Archetypes
 	//   map = The map to use for tilemap related components.
 	// Returns:
 	//   A pointer to the newly constructed game object.
-	GameObject* CreatePlatformerTilemapObject(Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
-
-	// Create the monkey game object.
-	// Params:
-	//   mesh  = The mesh to use for the object's sprite.
-	//   spriteSource = The sprite source to use for the object.
-	// Returns:
-	//	 A pointer to the newly constructed game object
-	GameObject* CreatePlatformerMonkey(Mesh* mesh, SpriteSource* spriteSource);
-
-	// Create a collectable game object.
-	// Params:
-	//   mesh  = The mesh to use for the object's sprite.
-	//   spriteSource = The sprite source to use for the object.
-	// Returns:
-	//	 A pointer to the newly constructed game object
-	GameObject* CreateCollectable(Mesh* mesh, SpriteSource* spriteSource, Vector2D translation);
+	GameObject* CreateLevel1Tilemap(Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
 
 	// Create a text game object.
 	// Params:
@@ -131,6 +91,22 @@ namespace Archetypes
 	// Returns:
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateHazard(Mesh* mesh, SpriteSource* spriteSource, Vector2D translation = Vector2D(0,0), Vector2D scale = Vector2D(100,100));
+
+	// Create a turret game object.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//   spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object
+	GameObject* CreateTurret(GameObject* projectileArchetype, Mesh* mesh, SpriteSource* spriteSource);
+
+	// Create a turret projectile game object.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//   spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object
+	GameObject* CreateTurretProjectile(Mesh* mesh, SpriteSource* spriteSource);
 
 	// Create an Enemy game object.
 	// Params:

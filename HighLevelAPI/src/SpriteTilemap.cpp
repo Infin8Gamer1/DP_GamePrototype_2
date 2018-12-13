@@ -30,7 +30,7 @@ void SpriteTilemap::Draw()
 			//skip if this cell is empty or has an error aka it is less than or equal to 0
 			if(cellValue > 0)
 			{
-				SetFrame(cellValue - 1);
+				SetFrame(cellValue);
 
 				Sprite::Draw(Vector2D(tileScale.x * c, tileScale.y * -r));
 			}

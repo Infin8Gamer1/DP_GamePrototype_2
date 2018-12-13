@@ -18,6 +18,8 @@
 #include <BetaObject.h>
 #include "GameObject.h"
 
+#include <vector>
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -75,6 +77,13 @@ public:
 	//	   then return the pointer to the named game object,
 	//	   else return nullptr.
 	GameObject* GetObjectByName(const std::string& objectName) const;
+
+	// Returns a vector of pointers to active game objects matching the specified name.
+	// Params:
+	//	 objectName = The name of the object to be returned, if found.
+	// Returns:
+	//   A vector of pointers to the named game objects.
+	std::vector<GameObject*> GetAllObjectsByName(const std::string& objectName) const;
 
 	// Returns a pointer to the first game object archetype matching the specified name.
 	// Params:

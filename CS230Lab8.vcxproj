@@ -14,7 +14,8 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{553D497C-DD10-4B3D-9F5A-CC4267744407}</ProjectGuid>
     <RootNamespace>CS230Lab8</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <ProjectName>CD_Projekt_Sand</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -108,42 +109,32 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\BulletMovement.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
-    <ClCompile Include="Source\GameController.cpp" />
-    <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
-    <ClCompile Include="Source\Level3.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\MonkeyMovement.cpp" />
     <ClCompile Include="Source\PatrolAI.cpp" />
-    <ClCompile Include="Source\Platformer.cpp" />
-    <ClCompile Include="Source\PlayerShip.cpp" />
+    <ClCompile Include="Source\PlacePathTile.cpp" />
     <ClCompile Include="Source\ScreenWrap.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\TimedDeath.cpp" />
+    <ClCompile Include="Source\TuretAI.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
-    <ClCompile Include="Source\WinLevel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Archetypes.h" />
     <ClInclude Include="Source\BulletMovement.h" />
     <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\GameController.h" />
-    <ClInclude Include="Source\Level2.h" />
     <ClInclude Include="Source\Level1.h" />
-    <ClInclude Include="Source\Level3.h" />
-    <ClInclude Include="Source\MonkeyMovement.h" />
     <ClInclude Include="Source\PatrolAI.h" />
-    <ClInclude Include="Source\Platformer.h" />
-    <ClInclude Include="Source\PlayerShip.h" />
+    <ClInclude Include="Source\PlacePathTile.h" />
     <ClInclude Include="Source\ScreenWrap.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\TimedDeath.h" />
+    <ClInclude Include="Source\TurretAI.h" />
     <ClInclude Include="Source\Utils.h" />
-    <ClInclude Include="Source\WinLevel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

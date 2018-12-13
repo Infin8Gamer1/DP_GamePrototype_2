@@ -11,7 +11,6 @@
 
 #include "stdafx.h"
 #include "Level1.h"
-#include "Level2.h"
 #include "Space.h"
 #include "MeshHelper.h"
 #include "Sprite.h"
@@ -22,83 +21,125 @@
 #include <Mesh.h>
 #include <Color.h>
 #include <Engine.h>
-#include "Level3.h"
-#include "SoundManager.h"
+#include <Texture.h>
+#include <SpriteSource.h>
+#include <Tilemap.h>
 
-Levels::Level1::Level1() : Level("Level1")
+Levels::Level1::Level1() : Level("Level1"), meshShip(nullptr), meshBullet(nullptr), dataMap(nullptr), textureMap(nullptr), spriteSourceMap(nullptr), meshMap(nullptr), columnsMap(4), rowsMap(3)
 {
-	// Meshes
-	meshShip = nullptr;
-	meshBullet = nullptr;
-
-	// Sound manager
-	soundManager = nullptr;
-	musicChannel = nullptr;
 }
 
 void Levels::Level1::Load()
 {
 	std::cout << GetName() << "::Load" << std::endl;
+	
+	// Create meshes.
 	meshShip = CreateTriangleMesh(Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1));
 	meshBullet = CreateTriangleMesh(Color(1, 0, 0), Color(1, 0, 0), Color(1, 0, 0));
+	meshQuadGeneric = CreateQuadMesh(Vector2D(1.0f, 1.0f), Vector2D(0.5f, 0.5f));
+
+	// Create textures.
+	textureTurret = Texture::CreateTextureFromFile("Turret.png");
+	textureTurretProjectile = Texture::CreateTextureFromFile("TurretProjectile.png");
+
+	// Create sprite sources.
+	spriteSourceTurret = new SpriteSource(1, 1, textureTurret);
+	spriteSourceTurretProjectile = new SpriteSource(1, 1, textureTurretProjectile);
+
+	// Get the object manager for ease of use.
+	GameObjectManager& objectManager = GetSpace()->GetObjectManager();
+
+	GameObject* projectileArchetype = Archetypes::CreateTurretProjectile(meshQuadGeneric, spriteSourceTurretProjectile);
+	objectManager.AddArchetype(*projectileArchetype);
+	objectManager.AddArchetype(*Archetypes::CreateTurret(projectileArchetype, meshQuadGeneric, spriteSourceTurret));
 
 	GameObject* Bullet = Archetypes::CreateBulletArchetype(meshBullet);
-	GetSpace()->GetObjectManager().AddArchetype(*Bullet);
+	objectManager.AddArchetype(*Bullet);
 
-	soundManager = Engine::GetInstance().GetModule<SoundManager>();
-	soundManager->AddMusic("Asteroid_Field.mp3");
-	soundManager->AddEffect("teleport.wav");
+	//map
+	dataMap = Tilemap::CreateTilemapFromFile("Assets/Levels/Level1.txt");
+	if (dataMap == nullptr)
+	{
+		std::cout << "Error Loading Tilemap!";
+	}
+	else
+	{
+		Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
+		meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
 
-	soundManager->AddBank("Master Bank.strings.bank");
-	soundManager->AddBank("Master Bank.bank");
+		textureMap = Texture::CreateTextureFromFile("TilemapV2.png");
+
+		spriteSourceMap = new SpriteSource(columnsMap, rowsMap, textureMap);
+	}
 }
 
 void Levels::Level1::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* Ship = Archetypes::CreateShip(meshShip);
-	GetSpace()->GetObjectManager().AddObject(*Ship);
+	// Get the object manager for ease of use.
+	GameObjectManager& objectManager = GetSpace()->GetObjectManager();
 
-	musicChannel = soundManager->PlaySound("Asteroid Field");
+	GameObject* Map = Archetypes::CreateLevel1Tilemap(meshMap, spriteSourceMap, dataMap);
+	objectManager.AddObject(*Map);
+
+	objectManager.AddObject(*new GameObject(*objectManager.GetArchetypeByName("Turret")));
+
+	GameObject* circle = Archetypes::CreateCircle(meshQuadGeneric, spriteSourceTurret);
+	static_cast<Transform*>(circle->GetComponent("Transform"))->SetTranslation(Vector2D(100.0f, 200.0f));
+	static_cast<Physics*>(circle->GetComponent("Physics"))->SetVelocity(Vector2D(0.0f, -75.0f));
+	objectManager.AddObject(*circle);
+
+	/*GameObject* Ship = Archetypes::CreateShip(meshShip);
+	GetSpace()->GetObjectManager().AddObject(*Ship);*/
 }
 
 void Levels::Level1::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 
-	if (Input::GetInstance().CheckReleased('T')) {
-		soundManager->PlaySound("teleport.wav");
-	}
-
 	if (Input::GetInstance().CheckReleased('1')) {
 		GetSpace()->RestartLevel();
-	}
-	else if (Input::GetInstance().CheckReleased('2'))
-	{
-		GetSpace()->SetLevel(new Levels::Level2());
-	}
-	else if (Input::GetInstance().CheckReleased('3')) {
-		GetSpace()->SetLevel(new Levels::Level3());
 	}
 }
 
 void Levels::Level1::Shutdown()
 {
 	std::cout << GetName() << "::Shutdown" << std::endl;
-
-	musicChannel->stop();
-	musicChannel = nullptr;
 }
 
 void Levels::Level1::Unload()
 {
 	std::cout << GetName() << "::Unload" << std::endl;
 
-	delete meshShip;
-	meshShip = nullptr;
+	// If the map was successfully loaded, unload all of its resources.
+	if (dataMap != nullptr)
+	{
+		delete spriteSourceMap;
+		spriteSourceMap = nullptr;
+		delete textureMap;
+		textureMap = nullptr;
+		delete meshMap;
+		meshMap = nullptr;
+		delete dataMap;
+		dataMap = nullptr;
+	}
+
+	delete spriteSourceTurretProjectile;
+	spriteSourceTurretProjectile = nullptr;
+	delete spriteSourceTurret;
+	spriteSourceTurret = nullptr;
+
+	delete textureTurretProjectile;
+	textureTurretProjectile = nullptr;
+	delete textureTurret;
+	textureTurret = nullptr;
+
+	delete meshQuadGeneric;
+	meshQuadGeneric = nullptr;
 	delete meshBullet;
 	meshBullet = nullptr;
+	delete meshShip;
+	meshShip = nullptr;
 
-	soundManager->Shutdown();
 }
