@@ -25,6 +25,8 @@ void GameController::Initialize()
 
 void GameController::Update(float dt)
 {
+	UNREFERENCED_PARAMETER(dt);
+
 	if (physics->GetVelocity().x == 0 && physics->GetVelocity().y == 0)
 	{
 		//check to see if place is moveable
