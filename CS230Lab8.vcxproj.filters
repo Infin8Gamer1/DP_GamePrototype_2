@@ -40,13 +40,10 @@
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PatrolAI.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Utils.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Turet AI.cpp">
+    <ClCompile Include="Source\TuretAI.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,8 +72,7 @@
     <ClInclude Include="Source\Enemy.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
-    
-	<ClInclude Include="Source\PatrolAI.h">
+    <ClInclude Include="Source\PatrolAI.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\Utils.h">
