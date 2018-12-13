@@ -20,7 +20,7 @@ Component * ColliderTilemap::Clone() const
 
 void ColliderTilemap::Draw()
 {
-
+	//DO debug draw
 }
 
 bool ColliderTilemap::IsCollidingWith(const Collider & other) const
@@ -115,7 +115,7 @@ bool ColliderTilemap::IsCollidingAtPosition(float x, float y) const
 
 	int cellValue = map->GetCellValue(x2, y2);
 
-	return (cellValue > 0);
+	return (cellValue > 3);
 }
 
 // Move an object and set its velocity based on where it collided with the tilemap.

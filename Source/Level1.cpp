@@ -27,9 +27,6 @@
 
 Levels::Level1::Level1() : Level("Level1")
 {
-	// Meshes
-	meshShip = nullptr;
-	meshBullet = nullptr;
 
 	// Tilemap
 	dataMap = nullptr;
@@ -44,17 +41,12 @@ Levels::Level1::Level1() : Level("Level1")
 void Levels::Level1::Load()
 {
 	std::cout << GetName() << "::Load" << std::endl;
-	meshShip = CreateTriangleMesh(Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1));
-	meshBullet = CreateTriangleMesh(Color(1, 0, 0), Color(1, 0, 0), Color(1, 0, 0));
-
-	GameObject* Bullet = Archetypes::CreateBulletArchetype(meshBullet);
-	GetSpace()->GetObjectManager().AddArchetype(*Bullet);
 
 	//map
 	Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
 	meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
 
-	textureMap = Texture::CreateTextureFromFile("Tilemap.png");
+	textureMap = Texture::CreateTextureFromFile("TilemapV2.png");
 
 	spriteSourceMap = new SpriteSource(columnsMap, rowsMap, textureMap);
 }
@@ -93,11 +85,6 @@ void Levels::Level1::Shutdown()
 void Levels::Level1::Unload()
 {
 	std::cout << GetName() << "::Unload" << std::endl;
-
-	delete meshShip;
-	meshShip = nullptr;
-	delete meshBullet;
-	meshBullet = nullptr;
 
 	delete dataMap;
 	dataMap = nullptr;

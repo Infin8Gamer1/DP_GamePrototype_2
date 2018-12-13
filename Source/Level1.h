@@ -70,10 +70,6 @@ namespace Levels
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		// Meshes
-		Mesh* meshShip;
-		Mesh* meshBullet;
-
 		// Title
 		static const unsigned titleStringLength = 20;
 		char windowTitle[titleStringLength];

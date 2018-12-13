@@ -137,26 +137,6 @@ GameObject * Archetypes::CreateRectangle(Mesh * mesh)
 	return circle;
 }
 
-GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteSource, Tilemap * map)
-{
-	GameObject* tileMap = new GameObject("tileMap");
-	//transform
-	Transform* transform = new Transform(Vector2D(-350, 250), Vector2D(100, 100), 0.0f);
-	tileMap->AddComponent(transform);
-	//Sprite
-	SpriteTilemap* sprite = new SpriteTilemap();
-	sprite->SetMesh(mesh);
-	sprite->SetSpriteSource(spriteSource);
-	sprite->SetTilemap(map);
-	tileMap->AddComponent(sprite);
-	//Collider Tilemap
-	ColliderTilemap* colliderTilemap = new ColliderTilemap();
-	colliderTilemap->SetTilemap(map);
-	tileMap->AddComponent(colliderTilemap);
-
-	return tileMap;
-}
-
 GameObject * Archetypes::CreateLevel1Tilemap(Mesh * mesh, SpriteSource * spriteSource, Tilemap * map)
 {
 	GameObject* tileMap = new GameObject("tileMapLevel1");
@@ -176,42 +156,6 @@ GameObject * Archetypes::CreateLevel1Tilemap(Mesh * mesh, SpriteSource * spriteS
 	tileMap->AddComponent(colliderTilemap);
 
 	return tileMap;
-}
-
-GameObject * Archetypes::CreateCollectable(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation)
-{
-	GameObject* Collectable = new GameObject("Collectable");
-	//transform
-	Transform* transform = new Transform(translation, Vector2D(50, 50), 0.0f);
-	Collectable->AddComponent(transform);
-	//Sprite
-	Sprite* sprite = new Sprite();
-	sprite->SetMesh(mesh);
-	sprite->SetSpriteSource(spriteSource);
-	Collectable->AddComponent(sprite);
-	//ColliderPoint
-	ColliderCircle* collider = new ColliderCircle(transform->GetScale().x/4);
-	Collectable->AddComponent(collider);
-
-	return Collectable;
-}
-
-GameObject * Archetypes::CreateHazard(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation, Vector2D scale)
-{
-	GameObject* Hazard = new GameObject("Hazard");
-	//transform
-	Transform* transform = new Transform(translation, scale, 0.0f);
-	Hazard->AddComponent(transform);
-	//Sprite
-	Sprite* sprite = new Sprite();
-	sprite->SetMesh(mesh);
-	sprite->SetSpriteSource(spriteSource);
-	Hazard->AddComponent(sprite);
-	//Box Collider
-	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2.1f), abs(transform->GetScale().y / 2.1f)));
-	Hazard->AddComponent(collider);
-
-	return Hazard;
 }
 
 GameObject * Archetypes::CreateText(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation, Vector2D scale)
@@ -247,7 +191,6 @@ GameObject * Archetypes::CreateEnemy(Mesh * mesh, SpriteSource * spriteSource, V
 	//Physics
 	Physics* physics = new Physics();
 	physics->SetMass(1.0f);
-	physics->SetGravity(Vector2D(0, -200.0f));
 	enemy->AddComponent(physics);
 	//Box Collider
 	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2), abs(transform->GetScale().y / 2)));
