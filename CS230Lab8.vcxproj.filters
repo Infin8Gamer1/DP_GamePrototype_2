@@ -61,9 +61,6 @@
     <ClCompile Include="Source\PlaceTurretTile.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
-    <ClCompile Include="Source\AStarPath.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\City.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
@@ -115,9 +112,6 @@
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlaceTurretTile.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AStarPath.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\City.h">
