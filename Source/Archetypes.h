@@ -108,9 +108,17 @@ namespace Archetypes
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateEnemy(Mesh* mesh, SpriteSource* spriteSource, Vector2D translation = Vector2D(0,0), Vector2D scale = Vector2D(80, 80));
 
+	// Create a health bar game object.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//   spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object
+	GameObject* CreateHealthBar(Mesh* mesh, SpriteSource* spriteSource);
+
 	GameObject* CreateGameController();
 
-	GameObject* CreateCity(Mesh* mesh);
+	GameObject* CreateCity(Mesh* mesh, SpriteSource* spriteSource);
 }
 
 //----------------------------------------------------------------------------

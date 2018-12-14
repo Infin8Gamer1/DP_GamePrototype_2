@@ -78,10 +78,12 @@ namespace Levels
 		// Textures
 		Texture* textureTurret;
 		Texture* textureTurretProjectile;
+		Texture* textureCity;
 
 		// Sprite sources
 		SpriteSource* spriteSourceTurret;
 		SpriteSource* spriteSourceTurretProjectile;
+		SpriteSource* spriteSourceCity;
 
 		// Title
 		static const unsigned titleStringLength = 20;
@@ -96,10 +98,15 @@ namespace Levels
 		unsigned columnsMap;
 		unsigned rowsMap;
 
-		//Enemy
+		// Enemy
 		Mesh* meshEnemy;
 		Texture* textureEnemy;
 		SpriteSource* spriteSourceEnemy;
+
+		// Health bar
+		Mesh* meshHealthBar;
+		Texture* textureHealthBar;
+		SpriteSource* spriteSourceHealthBar;
 	};
 }
 

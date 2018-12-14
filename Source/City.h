@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Enemy.h
+// File Name:	City.h
 // Author(s):	David Cohen (david.cohen)
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
@@ -33,10 +33,9 @@ typedef class Transform Transform;
 
 namespace Behaviors
 {
-	typedef class PatrolAI PatrolAI;
-	typedef class AStarPath AStarPath;
+	typedef class HealthBar HealthBar;
 
-	class Enemy : public Component
+	class City : public Component
 	{
 	public:
 		//------------------------------------------------------------------------------
@@ -45,8 +44,8 @@ namespace Behaviors
 
 		// Constructor
 		// Params:
-		//   health = How much health the enemy should have.
-		Enemy(int health);
+		//   health = How much health the city should have.
+		City(int health);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -71,7 +70,7 @@ namespace Behaviors
 		// Params:
 		//   object = The first object.
 		//   other  = The other object the first object is colliding with.
-		friend void EnemyCollisionHandler(GameObject& object, GameObject& other);
+		friend void CityCollisionHandler(GameObject& object, GameObject& other);
 
 	private:
 		//------------------------------------------------------------------------------
@@ -79,10 +78,9 @@ namespace Behaviors
 		//------------------------------------------------------------------------------
 
 		// Components
-		Transform* transform;
-		PatrolAI* patrolAI;
-		AStarPath* aStarPath;
+		HealthBar* healthBar;
 
+		// Miscellaneous variables
 		int health;
 	};
 }
