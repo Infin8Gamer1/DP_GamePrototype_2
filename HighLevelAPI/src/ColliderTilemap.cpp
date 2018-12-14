@@ -115,7 +115,7 @@ bool ColliderTilemap::IsCollidingAtPosition(float x, float y) const
 
 	int cellValue = map->GetCellValue(x2, y2);
 
-	return (cellValue > 3);
+	return (cellValue > 5);
 }
 
 // Move an object and set its velocity based on where it collided with the tilemap.
@@ -243,6 +243,11 @@ float ColliderTilemap::GetNextTileCenter(RectangleSide side, float sidePosition)
 	point = transform->GetMatrix() * point;
 
 	return *result;
+}
+
+const Tilemap* ColliderTilemap::GetTilemap()
+{
+	return map;
 }
 
 Vector2D ColliderTilemap::ConvertTileMapCordsToWorldCords(Vector2D inputCords) {

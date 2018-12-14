@@ -168,6 +168,8 @@ namespace Behaviors
 	{
 		path.clear();
 		pathSize = 0;
+		pathIndex = 0;
+		nextPathIndex = 1;
 	}
 
 	// Adds a point to the path.

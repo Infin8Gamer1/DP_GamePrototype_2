@@ -74,6 +74,11 @@ public:
 	//   map = A pointer to the tilemap resource.
 	void SetTilemap(const Tilemap* map);
 
+	// Sets the tilemap to use for this collider.
+	// Params:
+	//   map = A pointer to the tilemap resource.
+	const Tilemap* GetTilemap();
+
 	Vector2D ConvertTileMapCordsToWorldCords(Vector2D inputCords);
 
 	Vector2D ConvertWorldCordsToTileMapCords(Vector2D inputCords);

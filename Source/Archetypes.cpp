@@ -33,7 +33,6 @@
 #include "GameController.h"
 #include "PlaceTurretTile.h"
 #include "PatrolAI.h"
-#include "AStarPath.h"
 
 namespace Archetypes
 {
@@ -285,9 +284,6 @@ namespace Archetypes
 		//PatrolAI
 		Behaviors::PatrolAI* patrolAI = new Behaviors::PatrolAI(75.0f);
 		enemy->AddComponent(patrolAI);
-		//AStarPath
-		Behaviors::AStarPath* aStar = new Behaviors::AStarPath();
-		enemy->AddComponent(aStar);
 		//Enemy
 		Behaviors::Enemy* enemyComponent = new Behaviors::Enemy(2);
 		enemy->AddComponent(enemyComponent);

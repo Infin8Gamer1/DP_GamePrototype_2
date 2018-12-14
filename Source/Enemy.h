@@ -26,6 +26,8 @@
 //------------------------------------------------------------------------------
 
 typedef class Transform Transform;
+typedef class Tilemap Tilemap;
+typedef class ColliderTilemap ColliderTilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -34,7 +36,14 @@ typedef class Transform Transform;
 namespace Behaviors
 {
 	typedef class PatrolAI PatrolAI;
-	typedef class AStarPath AStarPath;
+	
+
+	enum EnemyMode
+	{
+		PathFollow,
+		AStar,
+		Attack
+	};
 
 	class Enemy : public Component
 	{
@@ -74,14 +83,21 @@ namespace Behaviors
 		friend void EnemyCollisionHandler(GameObject& object, GameObject& other);
 
 	private:
+
+		void AStarToClosestCity();
+		void AttackClosestCity();
+
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
 		// Components
 		Transform* transform;
+		const Tilemap* dataMap;
 		PatrolAI* patrolAI;
-		AStarPath* aStarPath;
+		ColliderTilemap* ct;
+
+		EnemyMode mode;
 
 		int health;
 	};
