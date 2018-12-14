@@ -46,7 +46,7 @@ namespace Behaviors
 		// Constructor
 		// Params:
 		//   projectileDelay = How long the turret should wait between firing.
-		Enemy();
+		Enemy(int health);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -61,6 +61,18 @@ namespace Behaviors
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
+		// Gets the enemy's current health.
+		int GetHealth();
+
+		// Sets the enemy's current health.
+		void SetHealth(int health);
+
+		// Collision handler for Enemy objects.
+		// Params:
+		//   object = The first object.
+		//   other  = The other object the first object is colliding with.
+		friend void EnemyCollisionHandler(GameObject& object, GameObject& other);
+
 	private:
 		//------------------------------------------------------------------------------
 		// Private Variables:
@@ -70,6 +82,8 @@ namespace Behaviors
 		Transform* transform;
 		PatrolAI* patrolAI;
 		AStarPath* aStarPath;
+
+		int health;
 	};
 }
 

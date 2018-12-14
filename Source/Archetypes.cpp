@@ -222,7 +222,7 @@ namespace Archetypes
 		turret->AddComponent(sprite);
 
 		// Create a new turret AI.
-		turret->AddComponent(new Behaviors::TurretAI(projectileArchetype, 2000.0f, 2.0f, 175.0f));
+		turret->AddComponent(new Behaviors::TurretAI(projectileArchetype, 200.0f, 1.5f, 175.0f));
 
 		return turret;
 	}
@@ -283,18 +283,17 @@ namespace Archetypes
 		ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2), abs(transform->GetScale().y / 2)));
 		enemy->AddComponent(collider);
 		//PatrolAI
-		Behaviors::PatrolAI* patrolAI = new Behaviors::PatrolAI();
+		Behaviors::PatrolAI* patrolAI = new Behaviors::PatrolAI(75.0f);
 		enemy->AddComponent(patrolAI);
 		//AStarPath
 		Behaviors::AStarPath* aStar = new Behaviors::AStarPath();
 		enemy->AddComponent(aStar);
-		//EnemyControler
-		Behaviors::Enemy* enemyComponent = new Behaviors::Enemy();
+		//Enemy
+		Behaviors::Enemy* enemyComponent = new Behaviors::Enemy(2);
 		enemy->AddComponent(enemyComponent);
 
 		return enemy;
 	}
-
 
 	GameObject * CreateGameController()
 	{
@@ -306,7 +305,6 @@ namespace Archetypes
 
 		return gameController;
 	}
-
 
 	GameObject * CreateCity(Mesh * mesh)
 	{

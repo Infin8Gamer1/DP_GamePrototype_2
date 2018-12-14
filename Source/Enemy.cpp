@@ -23,6 +23,7 @@
 #include <Transform.h>
 #include "PatrolAI.h"
 #include "AStarPath.h"
+#include <Collider.h>
 
 namespace Behaviors
 {
@@ -30,10 +31,29 @@ namespace Behaviors
 	// Public Functions:
 	//------------------------------------------------------------------------------
 
+	// Collision handler for Enemy objects.
+	// Params:
+	//   object = The first object.
+	//   other  = The other object the first object is colliding with.
+	void EnemyCollisionHandler(GameObject& object, GameObject& other)
+	{
+		// Turret projectile collision handler.
+		if (other.GetName() == "TurretProjectile")
+		{
+			Enemy* enemy = static_cast<Enemy*>(object.GetComponent("Enemy"));
+
+			// Decrement the enemy's health and destroy the enemy if it has 0 health remaining.
+			if (--enemy->health <= 0)
+				object.Destroy();
+
+			other.Destroy();
+		}
+	}
+
 	// Constructor
 	// Params:
 	//   projectileDelay = How long the turret should wait between firing.
-	Enemy::Enemy() : Component("Enemy"), transform(nullptr), patrolAI(nullptr), aStarPath(nullptr)
+	Enemy::Enemy(int health) : Component("Enemy"), transform(nullptr), patrolAI(nullptr), aStarPath(nullptr), health(health)
 	{
 	}
 
@@ -52,6 +72,9 @@ namespace Behaviors
 		patrolAI = static_cast<PatrolAI*>(GetOwner()->GetComponent("PatrolAI"));
 		patrolAI->SetLoopMode(PatrolAI::LoopMode::STOP);
 		aStarPath = static_cast<AStarPath*>(GetOwner()->GetComponent("AStarPath"));
+
+		Collider* collider = static_cast<Collider*>(GetOwner()->GetComponent("Collider"));
+		collider->SetCollisionHandler(EnemyCollisionHandler);
 	}
 
 	// Update function for this component.
@@ -66,5 +89,17 @@ namespace Behaviors
 			patrolAI->SetActive(false);
 			//aStarPath->SetActive(true);
 		}
+	}
+
+	// Gets the enemy's current health.
+	int Enemy::GetHealth()
+	{
+		return health;
+	}
+
+	// Sets the enemy's current health.
+	void Enemy::SetHealth(int health_)
+	{
+		health = health_;
 	}
 };

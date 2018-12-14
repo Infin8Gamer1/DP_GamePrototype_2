@@ -132,9 +132,16 @@ void SpriteText::Draw()
 			continue;
 		}
 
+		// Calculate the frame in the spritesheet.
+		int frame = *iter - 32;
+
+		// Skip characters outside of the printable ASCII charset.
+		if (frame < 0 || frame >= static_cast<int>(columns * rows))
+			continue;
+
 		// Get the UV of the current character and set the current texture.
 		Vector2D uv;
-		spriteSource->GetUV(*iter - 32, uv);
+		spriteSource->GetUV(frame, uv);
 		Graphics::GetInstance().SetTexture(spriteSource->GetTexture(), uv);
 
 		// Set the translation & scale for the mesh.

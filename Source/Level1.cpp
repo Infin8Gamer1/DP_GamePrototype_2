@@ -25,6 +25,7 @@
 #include <SpriteSource.h>
 #include <Tilemap.h>
 #include "SpriteText.h"
+#include "GameController.h"
 
 Levels::Level1::Level1() : Level("Level1"), meshShip(nullptr), meshBullet(nullptr), dataMap(nullptr), textureMap(nullptr), spriteSourceMap(nullptr), meshMap(nullptr), columnsMap(4), rowsMap(3)
 {
@@ -90,15 +91,14 @@ void Levels::Level1::Initialize()
 	GameObject* Map = Archetypes::CreateLevel1Tilemap(meshMap, spriteSourceMap, dataMap);
 	objectManager.AddObject(*Map);
 
-	GameObject* gameController = Archetypes::CreateGameController();
-	objectManager.AddObject(*gameController);
-
 	GameObject* uiText = new GameObject(*objectManager.GetArchetypeByName("Text"));
 	static_cast<SpriteText*>(uiText->GetComponent("SpriteText"))->SetText("Paths Available : X\nTurets Available : X");
 	static_cast<Transform*>(uiText->GetComponent("Transform"))->SetTranslation(Vector2D(0.0f, -300.0f));
 	objectManager.AddObject(*uiText);
 
-	
+	GameObject* gameController = Archetypes::CreateGameController();
+	static_cast<GameController*>(gameController->GetComponent("GameController"))->SetHUD(static_cast<SpriteText*>(uiText->GetComponent("SpriteText")));
+	objectManager.AddObject(*gameController);
 }
 
 void Levels::Level1::Update(float dt)
