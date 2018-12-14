@@ -1,6 +1,6 @@
 /*
 File: GameController.h
-Name: Tyler Miller
+Name: Tyler Miller, Jacob Holyfield
 Date: 12-12-18
 Desc: The controller of the enemies
 */
@@ -21,18 +21,31 @@ public:
 	Component* Clone() const override;
 	void Initialize() override;
 	void Update(float dt) override;
+
 	void SetAmountOfTiles(int tiles);
 	int GetAmountOfTiles(void);
+
 	void SetAmountOfTurrets(int turrets);
 	int GetAmountOfTurrets(void);
+
 	void SetEnemyPath(std::vector<Vector2D> path);
 	std::vector<Vector2D> GetEnemyPath();
 	void AddPointToEnemyPath(Vector2D point);
 private:
+	void SpawnEnemy();
+
+	//Components
 	Physics* physics;
 	Transform* transform;
 	Tilemap* tilemap;
-	int tilesAvailable;
+
+	const Vector2D EnemySpawnLocation = Vector2D(9,0);
+
+	int pathTilesAvailable;
+
 	int turretsAvailable;
+
 	std::vector<Vector2D> enemyPath;
+
+
 };

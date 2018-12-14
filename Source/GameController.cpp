@@ -1,6 +1,6 @@
 /*
 File: GameController.cpp
-Name: Tyler Miller
+Name: Tyler Miller, Jacob Holyfield
 Date: 12-12-18
 Desc: The controller of the enemies
 */
@@ -12,9 +12,13 @@ Desc: The controller of the enemies
 #include "Tilemap.h"
 #include "PatrolAI.h"
 #include <ColliderTilemap.h>
+#include <GameObject.h>
+#include <Input.h>
+#include <Animation.h>
+#include "PatrolAI.h"
 
 GameController::GameController()
-	:Component("GameController"), physics(nullptr), transform(nullptr), tilesAvailable(0), turretsAvailable(0)
+	:Component("GameController"), physics(nullptr), transform(nullptr), pathTilesAvailable(0), turretsAvailable(0)
 {
 }
 
@@ -39,6 +43,10 @@ void GameController::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 
+	if (Input::GetInstance().CheckTriggered(' ')) {
+		SpawnEnemy();
+	}
+
 	/*if (static_cast<Behaviors::PatrolAI*>(GetOwner()->GetComponent("PatrolAI"))->GetMoving() != true)
 	{
 		//Activate A* here
@@ -47,12 +55,12 @@ void GameController::Update(float dt)
 
 void GameController::SetAmountOfTiles(int tiles)
 {
-	tilesAvailable = tiles;
+	pathTilesAvailable = tiles;
 }
 
 int GameController::GetAmountOfTiles(void)
 {
-	return tilesAvailable;
+	return pathTilesAvailable;
 }
 
 void GameController::SetAmountOfTurrets(int turrets)
@@ -78,4 +86,18 @@ std::vector<Vector2D> GameController::GetEnemyPath()
 void GameController::AddPointToEnemyPath(Vector2D point)
 {
 	enemyPath.push_back(point);
+}
+
+void GameController::SpawnEnemy()
+{
+	GameObjectManager& gom = GetOwner()->GetSpace()->GetObjectManager();
+
+	ColliderTilemap* ct = static_cast<ColliderTilemap*>(gom.GetObjectByName("tileMapLevel1")->GetComponent("Collider"));
+
+	GameObject* enemy = new GameObject(*gom.GetArchetypeByName("Enemy"));
+	static_cast<Transform*>(enemy->GetComponent("Transform"))->SetTranslation(ct->ConvertTileMapCordsToWorldCords(EnemySpawnLocation));
+	static_cast<Animation*>(enemy->GetComponent("Animation"))->Play(0, 17, 0.05f, true);
+	static_cast<Behaviors::PatrolAI*>(enemy->GetComponent("PatrolAI"))->SetPath(enemyPath);
+	gom.AddObject(*enemy);
+	
 }

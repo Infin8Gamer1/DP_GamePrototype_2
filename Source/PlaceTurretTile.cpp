@@ -24,6 +24,8 @@
 #include <Tilemap.h>
 #include <ColliderTilemap.h>
 #include "GameController.h"
+#include <GameObject.h>
+#include <GameObjectManager.h>
 
 namespace Behaviors
 {
@@ -45,7 +47,9 @@ namespace Behaviors
 	{
 		UNREFERENCED_PARAMETER(dt);
 
-		GameController* gc = static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"));
+		GameObjectManager* gom = &GetOwner()->GetSpace()->GetObjectManager();
+
+		GameController* gc = static_cast<GameController*>(gom->GetObjectByName("GameController")->GetComponent("GameController"));
 
 		//see if the player has clicked and has enough tiles
 		if (Input::GetInstance().CheckTriggered(VK_RBUTTON) && gc->GetAmountOfTurrets() >= 1) {

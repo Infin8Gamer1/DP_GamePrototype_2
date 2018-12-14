@@ -22,7 +22,7 @@
 // Components
 #include <Transform.h>
 #include "PatrolAI.h"
-//#include "AStarPath.h"
+#include "AStarPath.h"
 
 namespace Behaviors
 {
@@ -33,7 +33,7 @@ namespace Behaviors
 	// Constructor
 	// Params:
 	//   projectileDelay = How long the turret should wait between firing.
-	Enemy::Enemy() : Component("TurretAI"), transform(nullptr), patrolAI(nullptr), aStarPath(nullptr)
+	Enemy::Enemy() : Component("Enemy"), transform(nullptr), patrolAI(nullptr), aStarPath(nullptr)
 	{
 	}
 
@@ -51,7 +51,7 @@ namespace Behaviors
 		transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
 		patrolAI = static_cast<PatrolAI*>(GetOwner()->GetComponent("PatrolAI"));
 		patrolAI->SetLoopMode(PatrolAI::LoopMode::STOP);
-		//aStarPath = static_cast<AStarPath*>(GetOwner()->GetComponent("AStarPath"));
+		aStarPath = static_cast<AStarPath*>(GetOwner()->GetComponent("AStarPath"));
 	}
 
 	// Update function for this component.

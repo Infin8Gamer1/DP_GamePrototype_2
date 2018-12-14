@@ -95,6 +95,11 @@ namespace Levels
 
 		unsigned columnsMap;
 		unsigned rowsMap;
+
+		//Enemy
+		Mesh* meshEnemy;
+		Texture* textureEnemy;
+		SpriteSource* spriteSourceEnemy;
 	};
 }
 

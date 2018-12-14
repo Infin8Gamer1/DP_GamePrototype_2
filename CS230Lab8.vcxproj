@@ -106,6 +106,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Archetypes.cpp" />
+    <ClCompile Include="Source\AStarPath.cpp" />
     <ClCompile Include="Source\BulletMovement.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
@@ -127,6 +128,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Archetypes.h" />
+    <ClInclude Include="Source\AStarPath.h" />
     <ClInclude Include="Source\BulletMovement.h" />
     <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\Enemy.h" />

@@ -53,7 +53,7 @@ namespace Behaviors
 	// Params:
 	//   speed = How fast the player should move.
 	//   deathDuration = Length of death "animation" in seconds.
-	PatrolAI::PatrolAI(float speed, bool faceVelocity, PatrolAI::LoopMode loopMode) : Component("PlayerController"),
+	PatrolAI::PatrolAI(float speed, bool faceVelocity, PatrolAI::LoopMode loopMode) : Component("PatrolAI"),
 		speed(speed), faceVelocity(faceVelocity), loopMode(loopMode), pathSize(0), pathIndex(UINT_MAX), nextPathIndex(0), moving(true), movingForwards(true)
 	{
 		path = std::vector<Vector2D>();

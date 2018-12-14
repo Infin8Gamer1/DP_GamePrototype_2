@@ -32,6 +32,8 @@
 #include "SpriteText.h"
 #include "GameController.h"
 #include "PlaceTurretTile.h"
+#include "PatrolAI.h"
+#include "AStarPath.h"
 
 namespace Archetypes
 {
@@ -271,17 +273,22 @@ namespace Archetypes
 		enemy->AddComponent(sprite);
 		//Animation
 		Animation* animation = new Animation();
-		//animation->Play(0, 8, 0.4f, false);
+		//animation->Play(0, 16, 0.4f, true);
 		enemy->AddComponent(animation);
 		//Physics
 		Physics* physics = new Physics();
 		physics->SetMass(1.0f);
-		physics->SetGravity(Vector2D(0, -200.0f));
 		enemy->AddComponent(physics);
 		//Box Collider
 		ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2), abs(transform->GetScale().y / 2)));
 		enemy->AddComponent(collider);
-		//Enemy
+		//PatrolAI
+		Behaviors::PatrolAI* patrolAI = new Behaviors::PatrolAI();
+		enemy->AddComponent(patrolAI);
+		//AStarPath
+		Behaviors::AStarPath* aStar = new Behaviors::AStarPath();
+		enemy->AddComponent(aStar);
+		//EnemyControler
 		Behaviors::Enemy* enemyComponent = new Behaviors::Enemy();
 		enemy->AddComponent(enemyComponent);
 

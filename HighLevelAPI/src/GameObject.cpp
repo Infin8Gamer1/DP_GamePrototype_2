@@ -78,14 +78,14 @@ void GameObject::Draw()
 	}
 }
 
-void GameObject::AddComponent(Component * component)
+void GameObject::AddComponent(Component* component)
 {
 	component->SetParent(this);
 	components[numComponents] = component;
 	numComponents++;
 }
 
-Component * GameObject::GetComponent(const std::string & _name)
+Component* GameObject::GetComponent(const std::string & _name)
 {
 	for (unsigned i = 0; i < numComponents; i++)
 	{

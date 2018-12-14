@@ -29,14 +29,6 @@ Sprite::Sprite() : Component("Sprite")
 
 Component * Sprite::Clone() const
 {
-	/*Sprite* output = new Sprite();
-	
-	output->frameIndex = frameIndex;
-	output->SetColor(color);
-	output->SetSpriteSource(spriteSource);
-	output->SetMesh(mesh);
-
-	return output;*/
 	return new Sprite(*this);
 }
 

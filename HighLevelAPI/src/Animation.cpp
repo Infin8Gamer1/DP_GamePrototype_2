@@ -33,11 +33,7 @@ Animation::Animation() : Component("Animation")
 
 Component * Animation::Clone() const
 {
-	Animation* out = new Animation();
-
-	//out->sprite = sprite;
-
-	return out;
+	return new Animation(*this);
 }
 
 void Animation::Initialize()

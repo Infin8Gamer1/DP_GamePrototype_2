@@ -71,7 +71,7 @@ namespace Behaviors
 	void TurretAI::FindClosestEnemy()
 	{
 		// Get all enemies in the level.
-		std::vector<GameObject*> enemies = GetOwner()->GetSpace()->GetObjectManager().GetAllObjectsByName("Circle");
+		std::vector<GameObject*> enemies = GetOwner()->GetSpace()->GetObjectManager().GetAllObjectsByName("Enemy");
 
 		// The current closest enemy distance (defaults to just outside the turret radius).
 		float closestDistanceSquared = radius * radius + 1.0f;

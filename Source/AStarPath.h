@@ -26,6 +26,7 @@
 //------------------------------------------------------------------------------
 
 typedef class Transform Transform;
+typedef class PatrolAI PatrolAI;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -65,6 +66,7 @@ namespace Behaviors
 
 		// Components
 		Transform* transform;
+		PatrolAI* patrolAI;
 	};
 }
 
