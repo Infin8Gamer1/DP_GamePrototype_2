@@ -101,6 +101,11 @@ Component* GameObject::GetComponent(const std::string & _name)
 void GameObject::Destroy()
 {
 	isDestroyed = true;
+
+	for (size_t i = 0; i < numComponents; i++)
+	{
+		components[i]->Shutdown();
+	}
 }
 
 bool GameObject::IsDestroyed() const

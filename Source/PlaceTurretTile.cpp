@@ -72,8 +72,8 @@ namespace Behaviors
 		int tileX = static_cast<int>(tile.x);
 		int tileY = static_cast<int>(tile.y);
 
-		//if the chosen path tile is a hill/mountian then return
-		if (map->GetCellValue(tileX, tileY) > 2) {
+		//if the chosen turret tile is not grass then return
+		if (map->GetCellValue(tileX, tileY) != 2) {
 			return;
 		}
 
@@ -90,10 +90,14 @@ namespace Behaviors
 				return;
 			}
 		}
-
+		
+		// Create the turret object.
 		GameObject* turret = new GameObject(*objectManager.GetArchetypeByName("Turret"));
 		static_cast<Transform*>(turret->GetComponent("Transform"))->SetTranslation(Vector2D(worldTile.x + 0.5f, worldTile.y + 0.5f));
 		objectManager.AddObject(*turret);
+
+		// Set the tile in the tilemap so no other tiles can be placed here.
+		map->SetCellValue(tileX, tileY, 5);
 
 		// Decrement the number of turrets the player can place.
 		gameController->SetAmountOfTurrets(gameController->GetAmountOfTurrets() - 1);

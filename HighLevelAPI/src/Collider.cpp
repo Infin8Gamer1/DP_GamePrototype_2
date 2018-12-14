@@ -19,6 +19,7 @@ Collider::Collider(ColliderType _type) : Component("Collider")
 {
 	type = _type;
 	handler = nullptr;
+	mapHandler = nullptr;
 }
 
 void Collider::Initialize()

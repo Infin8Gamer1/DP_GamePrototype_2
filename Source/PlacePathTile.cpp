@@ -56,8 +56,8 @@ void Behaviors::PlacePathTile::PlacePath(Vector2D MousePos)
 	int tileX = static_cast<int>(tile.x);
 	int tileY = static_cast<int>(tile.y);
 
-	//if the chosen path tile is a path then return
-	if (map->GetCellValue(tileX, tileY) == 1) {
+	//if the chosen path tile is not grass then return
+	if (map->GetCellValue(tileX, tileY) != 2) {
 		return;
 	}
 

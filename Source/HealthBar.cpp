@@ -19,6 +19,7 @@
 #include <GameObjectManager.h>
 
 // Components
+#include <Transform.h>
 #include <Sprite.h>
 
 namespace Behaviors
@@ -30,7 +31,7 @@ namespace Behaviors
 	// Constructor
 	// Params:
 	//   health = How much health the health bar should display.
-	HealthBar::HealthBar(int health, int maxHealth) : Component("HealthBar"), health(health), maxHealth(maxHealth)
+	HealthBar::HealthBar(int health, int maxHealth, float offset) : Component("HealthBar"), health(health), maxHealth(maxHealth), offset(offset)
 	{
 	}
 
@@ -45,9 +46,17 @@ namespace Behaviors
 	// Initialize data for this object.
 	void HealthBar::Initialize()
 	{
-		//GameObjectManager& objectManager = GetOwner()->GetSpace()->GetObjectManager();
-		//healthBar = new GameObject(*objectManager.GetArchetypeByName("HealthBar"));
-		//objectManager.AddObject(*healthBar);
+		transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
+
+		GameObjectManager& objectManager = GetOwner()->GetSpace()->GetObjectManager();
+		healthBar = new GameObject(*objectManager.GetArchetypeByName("HealthBar"));
+		objectManager.AddObject(*healthBar);
+	}
+
+	// Shutdown data for this object.
+	void HealthBar::Shutdown()
+	{
+		healthBar->Destroy();
 	}
 
 	// Update function for this component.
@@ -56,8 +65,14 @@ namespace Behaviors
 	void HealthBar::Update(float dt)
 	{
 		UNREFERENCED_PARAMETER(dt);
-		//Sprite* sprite = static_cast<Sprite*>(healthBar->GetComponent("Sprite"));
-		//sprite->SetFrame(healthBarFrames - static_cast<int>(static_cast<float>(health) / static_cast<float>(maxHealth) * static_cast<float>(healthBarFrames)));
+		
+		Vector2D translation = transform->GetTranslation();
+
+		Transform* healthBarTransform = static_cast<Transform*>(healthBar->GetComponent("Transform"));
+		healthBarTransform->SetTranslation(Vector2D(translation.x, translation.y + offset));
+
+		Sprite* sprite = static_cast<Sprite*>(healthBar->GetComponent("Sprite"));
+		sprite->SetFrame(healthBarFrames - static_cast<int>(static_cast<float>(health) / static_cast<float>(maxHealth) * static_cast<float>(healthBarFrames)));
 	}
 
 	// Gets the enemy's current health.
@@ -70,6 +85,18 @@ namespace Behaviors
 	void HealthBar::SetHealth(int health_)
 	{
 		health = health_;
+	}
+
+	// Gets the health bar's offset.
+	float HealthBar::GetOffset()
+	{
+		return offset;
+	}
+
+	// Sets the health bar's offset.
+	void HealthBar::SetOffset(float offset_)
+	{
+		offset = offset_;
 	}
 
 	// Returns the game object being used as the visual health bar.

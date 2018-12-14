@@ -49,7 +49,9 @@ bool ColliderTilemap::IsCollidingWith(const Collider & other) const
 
 	if (mapCollision.bottom || mapCollision.left || mapCollision.right || mapCollision.top) {
 		//call collision handler for the other object
-		other.GetMapCollisionHandler()(*other.GetOwner(), mapCollision);
+		MapCollisionEventHandler mapCollisionHandler = other.GetMapCollisionHandler();
+		if (mapCollisionHandler != nullptr)
+			mapCollisionHandler(*other.GetOwner(), mapCollision);
 		//we collided so return true
 		return true;
 	}

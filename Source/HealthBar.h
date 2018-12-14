@@ -43,7 +43,7 @@ namespace Behaviors
 		// Constructor
 		// Params:
 		//   health = How much health the health bar should display.
-		HealthBar(int health, int maxHealth);
+		HealthBar(int health, int maxHealth, float offset = 0.0f);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -52,6 +52,9 @@ namespace Behaviors
 
 		// Initialize data for this object.
 		void Initialize() override;
+
+		// Free memory associated with this object.
+		void Shutdown() override;
 
 		// Update function for this component.
 		// Params:
@@ -64,6 +67,12 @@ namespace Behaviors
 		// Sets the enemy's current health.
 		void SetHealth(int health);
 
+		// Gets the health bar's offset.
+		float GetOffset();
+
+		// Sets the health bar's offset.
+		void SetOffset(float offset);
+
 		// Returns the game object being used as the visual health bar.
 		GameObject* GetHealthBarObject();
 
@@ -72,10 +81,16 @@ namespace Behaviors
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
+		// How many frames there are in the health bar spritesheet.
 		static const int healthBarFrames = 16;
 
+		// Components
+		Transform* transform;
+
+		// Miscellaneous variables
 		int health;
 		int maxHealth;
+		float offset;
 		GameObject* healthBar;
 	};
 }

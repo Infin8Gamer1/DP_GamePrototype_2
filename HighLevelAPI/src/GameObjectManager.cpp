@@ -63,11 +63,9 @@ void GameObjectManager::Unload(void)
 void GameObjectManager::AddObject(GameObject & _gameObject)
 {
 	if (numObjects + 1 < maxObjects) {
-		gameObjectActiveList[numObjects] = &_gameObject;
-		gameObjectActiveList[numObjects]->SetParent(GetParent());
-		gameObjectActiveList[numObjects]->Initialize();
-
-		numObjects++;
+		gameObjectActiveList[numObjects++] = &_gameObject;
+		_gameObject.SetParent(GetParent());
+		_gameObject.Initialize();
 	}
 	else {
 		std::cout << "added too many objects!" << std::endl;
