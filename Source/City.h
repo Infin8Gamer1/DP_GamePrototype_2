@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Enemy.h
+// File Name:	City.h
 // Author(s):	David Cohen (david.cohen)
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
@@ -26,8 +26,6 @@
 //------------------------------------------------------------------------------
 
 typedef class Transform Transform;
-typedef class Tilemap Tilemap;
-typedef class ColliderTilemap ColliderTilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -35,17 +33,9 @@ typedef class ColliderTilemap ColliderTilemap;
 
 namespace Behaviors
 {
-	typedef class PatrolAI PatrolAI;
-	
+	typedef class HealthBar HealthBar;
 
-	enum EnemyMode
-	{
-		PathFollow,
-		AStar,
-		Attack
-	};
-
-	class Enemy : public Component
+	class City : public Component
 	{
 	public:
 		//------------------------------------------------------------------------------
@@ -54,8 +44,8 @@ namespace Behaviors
 
 		// Constructor
 		// Params:
-		//   health = How much health the enemy should have.
-		Enemy(int health);
+		//   health = How much health the city should have.
+		City(int health);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -80,25 +70,17 @@ namespace Behaviors
 		// Params:
 		//   object = The first object.
 		//   other  = The other object the first object is colliding with.
-		friend void EnemyCollisionHandler(GameObject& object, GameObject& other);
+		friend void CityCollisionHandler(GameObject& object, GameObject& other);
 
 	private:
-
-		void AStarToClosestCity();
-		void AttackClosestCity();
-
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
 		// Components
-		Transform* transform;
-		const Tilemap* dataMap;
-		PatrolAI* patrolAI;
-		ColliderTilemap* ct;
+		HealthBar* healthBar;
 
-		EnemyMode mode;
-
+		// Miscellaneous variables
 		int health;
 	};
 }

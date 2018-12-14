@@ -27,7 +27,13 @@
 #include "SpriteText.h"
 #include "GameController.h"
 
-Levels::Level1::Level1() : Level("Level1"), meshShip(nullptr), meshBullet(nullptr), dataMap(nullptr), textureMap(nullptr), spriteSourceMap(nullptr), meshMap(nullptr), columnsMap(4), rowsMap(3)
+Levels::Level1::Level1() : Level("Level1"),
+	meshShip(nullptr), meshBullet(nullptr), meshQuadGeneric(nullptr),
+	textureTurret(nullptr), textureTurretProjectile(nullptr),
+	spriteSourceTurret(nullptr), spriteSourceTurretProjectile(nullptr),
+	dataMap(nullptr), textureMap(nullptr), spriteSourceMap(nullptr), meshMap(nullptr),columnsMap(4), rowsMap(3),
+	meshEnemy(nullptr), textureEnemy(nullptr), spriteSourceEnemy(nullptr),
+	meshHealthBar(nullptr), textureHealthBar(nullptr), spriteSourceHealthBar(nullptr)
 {
 }
 
@@ -41,21 +47,32 @@ void Levels::Level1::Load()
 	// Get the object manager for ease of use.
 	GameObjectManager& objectManager = GetSpace()->GetObjectManager();
 
-	//Turret Projectile Architype
+	// Create the turret projectile archetype.
 	textureTurretProjectile = Texture::CreateTextureFromFile("TurretProjectile.png");
 	spriteSourceTurretProjectile = new SpriteSource(1, 1, textureTurretProjectile);
 	GameObject* projectileArchetype = Archetypes::CreateTurretProjectile(meshQuadGeneric, spriteSourceTurretProjectile);
 	objectManager.AddArchetype(*projectileArchetype);
 
-	//Turret Architype
+	// Create the turret archetype.
 	textureTurret = Texture::CreateTextureFromFile("Turret.png");
 	spriteSourceTurret = new SpriteSource(1, 1, textureTurret);
 	objectManager.AddArchetype(*Archetypes::CreateTurret(projectileArchetype, meshQuadGeneric, spriteSourceTurret));
 
-	//Text Architype
+	// Create the text archetype.
 	objectManager.AddArchetype(*Archetypes::CreateText());
 
-	//Enemy Architype
+	// Create the health bar archetype.
+	meshHealthBar = CreateQuadMesh(Vector2D(1.0f, 1.0f / 16.0f), Vector2D(0.5f, 0.5f));
+	textureHealthBar = Texture::CreateTextureFromFile("Health.png");
+	spriteSourceHealthBar = new SpriteSource(1, 16, textureHealthBar);
+	objectManager.AddArchetype(*Archetypes::CreateHealthBar(meshHealthBar, spriteSourceHealthBar));
+
+	// Create the city archetype.
+	textureCity = Texture::CreateTextureFromFile("City.png");
+	spriteSourceCity = new SpriteSource(1, 1, textureCity);
+	objectManager.AddArchetype(*Archetypes::CreateCity(meshQuadGeneric, spriteSourceCity));
+
+	// Create the enemy archetype.
 	Vector2D enemyTextureSize = Vector2D(1.0f / 17, 1.0f / 1);
 	meshEnemy = CreateQuadMesh(enemyTextureSize, Vector2D(1, 1));
 
@@ -65,7 +82,7 @@ void Levels::Level1::Load()
 
 	objectManager.AddArchetype(*Archetypes::CreateEnemy(meshEnemy, spriteSourceEnemy, Vector2D(0,0), Vector2D(50,50)));
 
-	//map
+	// Load map resources.
 	Vector2D textureSizeMap = Vector2D(1.0f / columnsMap, 1.0f / rowsMap);
 	meshMap = CreateQuadMesh(textureSizeMap, Vector2D(1, 1));
 
@@ -99,6 +116,10 @@ void Levels::Level1::Initialize()
 	GameObject* gameController = Archetypes::CreateGameController();
 	static_cast<GameController*>(gameController->GetComponent("GameController"))->SetHUD(static_cast<SpriteText*>(uiText->GetComponent("SpriteText")));
 	objectManager.AddObject(*gameController);
+
+	GameObject* city = new GameObject(*objectManager.GetArchetypeByName("City"));
+	static_cast<Transform*>(city->GetComponent("Transform"))->SetTranslation(Vector2D(100.0f, 200.0f));
+	objectManager.AddObject(*city);
 }
 
 void Levels::Level1::Update(float dt)
@@ -122,7 +143,7 @@ void Levels::Level1::Unload()
 {
 	std::cout << GetName() << "::Unload" << std::endl;
 
-	//delete Map
+	// Delete the map.
 	delete spriteSourceMap;
 	spriteSourceMap = nullptr;
 	delete textureMap;
@@ -130,24 +151,31 @@ void Levels::Level1::Unload()
 	delete meshMap;
 	meshMap = nullptr;
 
-
-	//delete SpriteSources
+	// Delete sprite sources.
 	delete spriteSourceTurretProjectile;
 	spriteSourceTurretProjectile = nullptr;
 	delete spriteSourceTurret;
 	spriteSourceTurret = nullptr;
 	delete spriteSourceEnemy;
 	spriteSourceEnemy = nullptr;
+	delete spriteSourceHealthBar;
+	spriteSourceHealthBar = nullptr;
+	delete spriteSourceCity;
+	spriteSourceCity = nullptr;
 
-	//delete textures
+	// Delete textures.
 	delete textureTurretProjectile;
 	textureTurretProjectile = nullptr;
 	delete textureTurret;
 	textureTurret = nullptr;
 	delete textureEnemy;
 	textureEnemy = nullptr;
+	delete textureHealthBar;
+	textureHealthBar = nullptr;
+	delete textureCity;
+	textureCity = nullptr;
 
-	//delete Meshes
+	// Delete meshes.
 	delete meshEnemy;
 	meshEnemy = nullptr;
 	delete meshQuadGeneric;
@@ -156,5 +184,6 @@ void Levels::Level1::Unload()
 	meshBullet = nullptr;
 	delete meshShip;
 	meshShip = nullptr;
-
+	delete meshHealthBar;
+	meshHealthBar = nullptr;
 }

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Enemy.h
+// File Name:	HealthBar.h
 // Author(s):	David Cohen (david.cohen)
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
@@ -26,8 +26,6 @@
 //------------------------------------------------------------------------------
 
 typedef class Transform Transform;
-typedef class Tilemap Tilemap;
-typedef class ColliderTilemap ColliderTilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -35,17 +33,7 @@ typedef class ColliderTilemap ColliderTilemap;
 
 namespace Behaviors
 {
-	typedef class PatrolAI PatrolAI;
-	
-
-	enum EnemyMode
-	{
-		PathFollow,
-		AStar,
-		Attack
-	};
-
-	class Enemy : public Component
+	class HealthBar : public Component
 	{
 	public:
 		//------------------------------------------------------------------------------
@@ -54,8 +42,8 @@ namespace Behaviors
 
 		// Constructor
 		// Params:
-		//   health = How much health the enemy should have.
-		Enemy(int health);
+		//   health = How much health the health bar should display.
+		HealthBar(int health, int maxHealth);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -76,30 +64,19 @@ namespace Behaviors
 		// Sets the enemy's current health.
 		void SetHealth(int health);
 
-		// Collision handler for Enemy objects.
-		// Params:
-		//   object = The first object.
-		//   other  = The other object the first object is colliding with.
-		friend void EnemyCollisionHandler(GameObject& object, GameObject& other);
+		// Returns the game object being used as the visual health bar.
+		GameObject* GetHealthBarObject();
 
 	private:
-
-		void AStarToClosestCity();
-		void AttackClosestCity();
-
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		// Components
-		Transform* transform;
-		const Tilemap* dataMap;
-		PatrolAI* patrolAI;
-		ColliderTilemap* ct;
-
-		EnemyMode mode;
+		static const int healthBarFrames = 16;
 
 		int health;
+		int maxHealth;
+		GameObject* healthBar;
 	};
 }
 

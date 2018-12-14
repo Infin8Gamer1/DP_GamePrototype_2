@@ -55,7 +55,7 @@ namespace Behaviors
 
 	// Constructor
 	// Params:
-	//   projectileDelay = How long the turret should wait between firing.
+	//   health = How much health the enemy should have.
 	Enemy::Enemy(int health) : Component("Enemy"), transform(nullptr), patrolAI(nullptr), health(health)
 	{
 		mode = EnemyMode::PathFollow;

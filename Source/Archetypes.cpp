@@ -33,6 +33,8 @@
 #include "GameController.h"
 #include "PlaceTurretTile.h"
 #include "PatrolAI.h"
+#include "City.h"
+#include "HealthBar.h"
 
 namespace Archetypes
 {
@@ -291,6 +293,30 @@ namespace Archetypes
 		return enemy;
 	}
 
+	// Create a health bar game object.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//   spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object
+	GameObject* CreateHealthBar(Mesh* mesh, SpriteSource* spriteSource)
+	{
+		// Create a new game object.
+		GameObject* healthBar = new GameObject("HealthBar");
+
+		// Create a new transform.
+		Transform* transform = new Transform(Vector2D(), Vector2D(64.0f, 16.0f));
+		healthBar->AddComponent(transform);
+
+		// Create a new sprite.
+		Sprite* sprite = new Sprite();
+		sprite->SetMesh(mesh);
+		sprite->SetSpriteSource(spriteSource);
+		healthBar->AddComponent(sprite);
+
+		return healthBar;
+	}
+
 	GameObject * CreateGameController()
 	{
 		GameObject* gameController = new GameObject("GameController");
@@ -302,16 +328,20 @@ namespace Archetypes
 		return gameController;
 	}
 
-	GameObject * CreateCity(Mesh * mesh)
+	GameObject * CreateCity(Mesh * mesh, SpriteSource * spriteSource)
 	{
 		GameObject* city = new GameObject("City");
-		Transform* transform = new Transform(Vector2D(100, 100), Vector2D(50,50), 0.f);
+		Transform* transform = new Transform(Vector2D(-100, -100), Vector2D(100,100), 0.f);
 		city->AddComponent(transform);
-		ColliderRectangle* collider = new ColliderRectangle(Vector2D(transform->GetScale().x / 2.f, transform->GetScale().y / 2.f));
+		ColliderRectangle* collider = new ColliderRectangle(Vector2D(transform->GetScale().x / 4.f, transform->GetScale().y / 4.f));
 		city->AddComponent(collider);
 		Sprite* sprite = new Sprite();
 		sprite->SetMesh(mesh);
+		sprite->SetSpriteSource(spriteSource);
 		city->AddComponent(sprite);
+		Behaviors::City* cityComponent = new Behaviors::City(10);
+		city->AddComponent(cityComponent);
+		city->AddComponent(new Behaviors::HealthBar(cityComponent->GetHealth(), cityComponent->GetHealth()));
 		return city;
 	}
 };
