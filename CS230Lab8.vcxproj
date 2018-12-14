@@ -108,9 +108,11 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\Archetypes.cpp" />
     <ClCompile Include="Source\AStarPath.cpp" />
     <ClCompile Include="Source\BulletMovement.cpp" />
+    <ClCompile Include="Source\City.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\GameController.cpp" />
+    <ClCompile Include="Source\HealthBar.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\PatrolAI.cpp" />
@@ -130,9 +132,11 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\Archetypes.h" />
     <ClInclude Include="Source\AStarPath.h" />
     <ClInclude Include="Source\BulletMovement.h" />
+    <ClInclude Include="Source\City.h" />
     <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\GameController.h" />
+    <ClInclude Include="Source\HealthBar.h" />
     <ClInclude Include="Source\Level1.h" />
     <ClInclude Include="Source\PatrolAI.h" />
     <ClInclude Include="Source\PlacePathTile.h" />

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Enemy.cpp
+// File Name:	City.cpp
 // Author(s):	David Cohen	
 // Project:		BetaEngine
 // Course:		CS230
@@ -11,7 +11,7 @@
 
 #include "stdafx.h"
 
-#include "Enemy.h"
+#include "City.h"
 
 // Systems
 #include <GameObject.h>
@@ -20,9 +20,7 @@
 #include <vector>
 
 // Components
-#include <Transform.h>
-#include "PatrolAI.h"
-#include "AStarPath.h"
+#include "HealthBar.h"
 #include <Collider.h>
 
 namespace Behaviors
@@ -35,15 +33,15 @@ namespace Behaviors
 	// Params:
 	//   object = The first object.
 	//   other  = The other object the first object is colliding with.
-	void EnemyCollisionHandler(GameObject& object, GameObject& other)
+	void CityCollisionHandler(GameObject& object, GameObject& other)
 	{
 		// Turret projectile collision handler.
-		if (other.GetName() == "TurretProjectile")
+		if (other.GetName() == "Enemy")
 		{
-			Enemy* enemy = static_cast<Enemy*>(object.GetComponent("Enemy"));
+			City* city = static_cast<City*>(object.GetComponent("City"));
 
-			// Decrement the enemy's health and destroy the enemy if it has 0 health remaining.
-			if (--enemy->health <= 0)
+			// Decrement the city's health and destroy the city if it has 0 health remaining.
+			if (--city->health <= 0)
 				object.Destroy();
 
 			other.Destroy();
@@ -52,53 +50,46 @@ namespace Behaviors
 
 	// Constructor
 	// Params:
-	//   health = How much health the enemy should have.
-	Enemy::Enemy(int health) : Component("Enemy"), transform(nullptr), patrolAI(nullptr), aStarPath(nullptr), health(health)
+	//   health = How much health the city should have.
+	City::City(int health) : Component("City"), healthBar(nullptr), health(health)
 	{
 	}
 
 	// Clone a component and return a pointer to the cloned component.
 	// Returns:
 	//   A pointer to a dynamically allocated clone of the component.
-	Component* Enemy::Clone() const
+	Component* City::Clone() const
 	{
-		return new Enemy(*this);
+		return new City(*this);
 	}
 
 	// Initialize data for this object.
-	void Enemy::Initialize()
+	void City::Initialize()
 	{
-		transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
-		patrolAI = static_cast<PatrolAI*>(GetOwner()->GetComponent("PatrolAI"));
-		patrolAI->SetLoopMode(PatrolAI::LoopMode::STOP);
-		aStarPath = static_cast<AStarPath*>(GetOwner()->GetComponent("AStarPath"));
+		healthBar = static_cast<HealthBar*>(GetOwner()->GetComponent("HealthBar"));
 
 		Collider* collider = static_cast<Collider*>(GetOwner()->GetComponent("Collider"));
-		collider->SetCollisionHandler(EnemyCollisionHandler);
+		collider->SetCollisionHandler(CityCollisionHandler);
 	}
 
 	// Update function for this component.
 	// Params:
 	//   dt = The (fixed) change in time since the last step.
-	void Enemy::Update(float dt)
+	void City::Update(float dt)
 	{
 		UNREFERENCED_PARAMETER(dt);
 
-		if (!patrolAI->GetMoving())
-		{
-			patrolAI->SetActive(false);
-			//aStarPath->SetActive(true);
-		}
+		healthBar->SetHealth(health);
 	}
 
 	// Gets the enemy's current health.
-	int Enemy::GetHealth()
+	int City::GetHealth()
 	{
 		return health;
 	}
 
 	// Sets the enemy's current health.
-	void Enemy::SetHealth(int health_)
+	void City::SetHealth(int health_)
 	{
 		health = health_;
 	}
