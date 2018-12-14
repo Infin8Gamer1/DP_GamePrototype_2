@@ -100,7 +100,6 @@ namespace Behaviors
 		{
 			patrolAI->SetActive(false);
 			mode = EnemyMode::Attack;
-			AttackClosestCity();
 		}
 	}
 
@@ -123,8 +122,27 @@ namespace Behaviors
 		//set start to the current position
 		Vector2D start = ct->ConvertWorldCordsToTileMapCords(Vector2D(floor(transform->GetTranslation().x), floor(transform->GetTranslation().y)));
 		//set the goal to the closest city
-		//TODO: make it go to the closest city for testing it is going to path to the corner.
-		Vector2D goal = Vector2D(0,0);
+		std::vector<GameObject*> citys = GetOwner()->GetSpace()->GetObjectManager().GetAllObjectsByName("City");
+
+		if (citys.size() < 1) {
+			return;
+		}
+
+		float minDistance = 1000000;
+
+		GameObject* closestCity = nullptr;
+
+		for each (GameObject* city in citys)
+		{
+			Transform* cityTransform = static_cast<Transform*>(city->GetComponent("Transform"));
+			float distance = cityTransform->GetTranslation().Distance(transform->GetTranslation());
+			if (distance < minDistance) {
+				minDistance = distance;
+				closestCity = city;
+			}
+		}
+		Transform* closestCityTransform = static_cast<Transform*>(closestCity->GetComponent("Transform"));
+		Vector2D goal = ct->ConvertWorldCordsToTileMapCords(closestCityTransform->GetTranslation());
 
 		//the path for thing to follow in world cords
 		std::vector<Vector2D> finalPath;
@@ -132,7 +150,7 @@ namespace Behaviors
 		finalPath.push_back(ct->ConvertTileMapCordsToWorldCords(Vector2D(start.x - 0.5f, start.y - 0.5f)));
 		//TODO: Auctualy generate path around obsticles using A*
 		//but for now just put the end point in
-		finalPath.push_back(ct->ConvertTileMapCordsToWorldCords(goal));
+		finalPath.push_back(ct->ConvertTileMapCordsToWorldCords(Vector2D(goal.x - 0.5f, goal.y - 0.5f)));
 
 		//set the PatrolAI to go follow the path
 		patrolAI->ClearPath();
@@ -195,35 +213,5 @@ namespace Behaviors
 				fScore[neighbor] : = gScore[neighbor] + heuristic_cost_estimate(neighbor, goal)
 		}*/
 			
-	}
-
-	void Enemy::AttackClosestCity()
-	{
-		std::vector<GameObject*> citys = GetOwner()->GetSpace()->GetObjectManager().GetAllObjectsByName("City");
-
-		if (citys.size() < 1) {
-			return;
-		}
-
-		float minDistance = 1000000;
-
-		GameObject* closestCity = nullptr;
-
-		for each (GameObject* city in citys)
-		{
-			Transform* cityTransform = static_cast<Transform*>(city->GetComponent("Transform"));
-			float distance = cityTransform->GetTranslation().Distance(transform->GetTranslation());
-			if (distance < minDistance) {
-				minDistance = distance;
-				closestCity = city;
-			}
-		}
-
-		//destroy it for now
-		//TODO: implement city health system
-		closestCity->Destroy();
-
-		
-
 	}
 };

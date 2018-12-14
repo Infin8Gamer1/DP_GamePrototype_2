@@ -85,7 +85,6 @@ namespace Behaviors
 	private:
 
 		void AStarToClosestCity();
-		void AttackClosestCity();
 
 		//------------------------------------------------------------------------------
 		// Private Variables:
