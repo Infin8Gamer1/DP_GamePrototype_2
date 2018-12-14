@@ -118,7 +118,7 @@ void Levels::Level1::Initialize()
 	objectManager.AddObject(*gameController);
 
 	GameObject* city = new GameObject(*objectManager.GetArchetypeByName("City"));
-	static_cast<Transform*>(city->GetComponent("Transform"))->SetTranslation(Vector2D(-200.0f, 300.0f));
+	static_cast<Transform*>(city->GetComponent("Transform"))->SetTranslation(Vector2D(100.0f, 200.0f));
 	objectManager.AddObject(*city);
 }
 

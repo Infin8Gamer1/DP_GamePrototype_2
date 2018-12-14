@@ -335,9 +335,9 @@ namespace Archetypes
 	GameObject * CreateCity(Mesh * mesh, SpriteSource * spriteSource)
 	{
 		GameObject* city = new GameObject("City");
-		Transform* transform = new Transform(Vector2D(100, 100), Vector2D(50,50), 0.f);
+		Transform* transform = new Transform(Vector2D(-100, -100), Vector2D(100,100), 0.f);
 		city->AddComponent(transform);
-		ColliderRectangle* collider = new ColliderRectangle(Vector2D(transform->GetScale().x / 2.f, transform->GetScale().y / 2.f));
+		ColliderRectangle* collider = new ColliderRectangle(Vector2D(transform->GetScale().x / 4.f, transform->GetScale().y / 4.f));
 		city->AddComponent(collider);
 		Sprite* sprite = new Sprite();
 		sprite->SetMesh(mesh);
