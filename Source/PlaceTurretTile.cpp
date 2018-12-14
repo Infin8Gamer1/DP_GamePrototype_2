@@ -45,10 +45,10 @@ namespace Behaviors
 	{
 		UNREFERENCED_PARAMETER(dt);
 
-		GameController* gameController = static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"));
+		GameController* gc = static_cast<GameController*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("GameController")->GetComponent("GameController"));
 
 		//see if the player has clicked and has enough tiles
-		if (Input::GetInstance().CheckTriggered(VK_RBUTTON) && gameController->GetAmountOfTurrets() >= 1) {
+		if (Input::GetInstance().CheckTriggered(VK_RBUTTON) && gc->GetAmountOfTurrets() >= 1) {
 			PlaceTurret(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 		}
 	}
@@ -68,12 +68,12 @@ namespace Behaviors
 		int tileX = static_cast<int>(tile.x);
 		int tileY = static_cast<int>(tile.y);
 
-		//if the chosen path tile is a path then return
+		//if the chosen path tile is a hill/mountian then return
 		if (map->GetCellValue(tileX, tileY) > 2) {
 			return;
 		}
 
-		Vector2D worldTile = colliderTilemap->ConvertTileMapCordsToWorldCords(tile);
+		Vector2D worldTile = colliderTilemap->ConvertTileMapCordsToWorldCords(Vector2D(static_cast<float>(tileX), static_cast<float>(tileY)));
 
 		GameObjectManager& objectManager = GetOwner()->GetSpace()->GetObjectManager();
 
@@ -81,12 +81,14 @@ namespace Behaviors
 		for (GameObject* turret : turrets)
 		{
 			Vector2D turretTileCoords = colliderTilemap->ConvertWorldCordsToTileMapCords(static_cast<Transform*>(turret->GetComponent("Transform"))->GetTranslation());
-			if (worldTile.Distance(turretTileCoords) <= 25.0f)
+			turretTileCoords = Vector2D(floor(turretTileCoords.x), floor(turretTileCoords.y));
+			if (Vector2D(static_cast<float>(tileX), static_cast<float>(tileY)).Distance(turretTileCoords) < 1.0f) {
 				return;
+			}
 		}
 
 		GameObject* turret = new GameObject(*objectManager.GetArchetypeByName("Turret"));
-		static_cast<Transform*>(turret->GetComponent("Transform"))->SetTranslation(worldTile);
+		static_cast<Transform*>(turret->GetComponent("Transform"))->SetTranslation(Vector2D(worldTile.x + 0.5f, worldTile.y + 0.5f));
 		objectManager.AddObject(*turret);
 
 		// Decrement the number of turrets the player can place.

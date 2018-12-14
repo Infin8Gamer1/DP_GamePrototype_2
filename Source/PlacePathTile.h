@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	ScreenWrap.h
-// Author(s):	Jeremy Kings (j.kings)
+// File Name:	PlacePathTile.h
+// Author(s):	Jacob Holyfield
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
 //
@@ -16,6 +16,8 @@
 //------------------------------------------------------------------------------
 
 #include "Component.h" // base class
+
+#include <Vector2D.h>
 
 //------------------------------------------------------------------------------
 
@@ -60,7 +62,7 @@ namespace Behaviors
 
 	private:
 
-		void PlaceTurret(Vector2D MousePos);
+		void PlacePath(Vector2D MousePos);
 
 		//------------------------------------------------------------------------------
 		// Private Variables:
@@ -68,6 +70,8 @@ namespace Behaviors
 
 		// Components
 		const Tilemap* map;
+		Vector2D lastPathPos;
+
 	};
 }
 

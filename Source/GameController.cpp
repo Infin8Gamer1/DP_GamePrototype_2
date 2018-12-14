@@ -30,9 +30,9 @@ Component * GameController::Clone() const
 void GameController::Initialize()
 {
 	ColliderTilemap* CT = static_cast<ColliderTilemap*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("tileMapLevel1")->GetComponent("Collider"));
-	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(8, 0)));
-	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(8, 1)));
-	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(8, 2)));
+	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(9, 0)));
+	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(9, 1)));
+	enemyPath.push_back(CT->ConvertTileMapCordsToWorldCords(Vector2D(9, 2)));
 }
 
 void GameController::Update(float dt)

@@ -85,7 +85,7 @@ void Levels::Level1::Initialize()
 	GameObject* Map = Archetypes::CreateLevel1Tilemap(meshMap, spriteSourceMap, dataMap);
 	objectManager.AddObject(*Map);
 
-	objectManager.AddObject(*new GameObject(*objectManager.GetArchetypeByName("Turret")));
+	//objectManager.AddObject(*new GameObject(*objectManager.GetArchetypeByName("Turret")));
 
 	GameObject* circle = Archetypes::CreateCircle(meshQuadGeneric, spriteSourceTurret);
 	static_cast<Transform*>(circle->GetComponent("Transform"))->SetTranslation(Vector2D(000.0f, 200.0f));

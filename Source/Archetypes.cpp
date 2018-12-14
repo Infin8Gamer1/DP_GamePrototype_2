@@ -293,12 +293,14 @@ namespace Archetypes
 	{
 		GameObject* gameController = new GameObject("GameController");
 		GameController* gc = new GameController();
-		gc->SetAmountOfTiles(1);
-		gc->SetAmountOfTurrets(1);
+		gc->SetAmountOfTiles(2);
+		gc->SetAmountOfTurrets(2);
 		gameController->AddComponent(gc);
 
 		return gameController;
 	}
+
+
 	GameObject * CreateCity(Mesh * mesh)
 	{
 		GameObject* city = new GameObject("City");
