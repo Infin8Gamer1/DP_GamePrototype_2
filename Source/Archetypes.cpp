@@ -281,8 +281,8 @@ namespace Archetypes
 		Physics* physics = new Physics();
 		physics->SetMass(1.0f);
 		enemy->AddComponent(physics);
-		//Box Collider
-		ColliderRectangle* collider = new ColliderRectangle(Vector2D(transform->GetScale().x / 2, transform->GetScale().y / 2));
+		//Circle Collider
+		ColliderCircle* collider = new ColliderCircle(transform->GetScale().x / 2);
 		enemy->AddComponent(collider);
 		//PatrolAI
 		Behaviors::PatrolAI* patrolAI = new Behaviors::PatrolAI(75.0f);
@@ -345,7 +345,7 @@ namespace Archetypes
 		city->AddComponent(sprite);
 		Behaviors::City* cityComponent = new Behaviors::City(10);
 		city->AddComponent(cityComponent);
-		city->AddComponent(new Behaviors::HealthBar(cityComponent->GetHealth(), cityComponent->GetHealth()));
+		city->AddComponent(new Behaviors::HealthBar(cityComponent->GetHealth(), cityComponent->GetHealth(), -25.0f));
 		return city;
 	}
 };
