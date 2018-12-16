@@ -132,15 +132,16 @@ namespace Behaviors
 
 		GameObject* closestCity = nullptr;
 
-		for each (GameObject* city in citys)
+		for (size_t i = 0; i < citys.size(); i++)
 		{
-			Transform* cityTransform = static_cast<Transform*>(city->GetComponent("Transform"));
+			Transform* cityTransform = static_cast<Transform*>(citys.at(i)->GetComponent("Transform"));
 			float distance = cityTransform->GetTranslation().Distance(transform->GetTranslation());
 			if (distance < minDistance) {
 				minDistance = distance;
-				closestCity = city;
+				closestCity = citys.at(i);
 			}
 		}
+		
 		Transform* closestCityTransform = static_cast<Transform*>(closestCity->GetComponent("Transform"));
 		Vector2D goal = ct->ConvertWorldCordsToTileMapCords(closestCityTransform->GetTranslation());
 
